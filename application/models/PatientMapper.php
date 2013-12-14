@@ -41,10 +41,10 @@ class Application_Model_PatientMapper {
     }
 
     public function find($id, Application_Model_Patient $patient = null) {
-        $result = $this->getDbTable()->find($id)->current();
-        if($patient == null)
-            return $result;
-        
+        $result = $this->getDbTable()->find($id);
+        if ($patient == null)
+            return $result->current();
+
         if (0 == count($result)) {
             return;
         }
@@ -97,11 +97,20 @@ class Application_Model_PatientMapper {
         return $entries;
     }
 
-    public function getMaximsFromPatient($patientID){
+    public function getMaximsFromPatient($patientID) {
         $patientRow = $this->find($patientID);
-        $result = $patientRow->findDependentRowset('Application_Model_DbTable_Maxim');
-        
-        return $result;
-    }
-}
+//        $result = $patientRow->findDependentRowset('Application_Model_DbTable_MaximHasPatient');
+        $result = $patientRow->findManyToManyRowset('Application_Model_DbTable_Maxim', 'Application_Model_DbTable_MaximHasPatient');
 
+        $entries = array();
+        foreach ($result as $row) {
+            $entry = new Application_Model_Maxim();
+            $entry->setId($row->maximID)
+                    ->setText($row->text);
+            $entries[] = $entry;
+        }
+
+        return $entries;
+    }
+
+}

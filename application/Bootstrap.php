@@ -72,14 +72,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         // add this route to the front controller 
         $frontController->getRouter()->addRoute('editPatient', $route);
 
-        $route = new Zend_Controller_Router_Route(
-                'patient/editmaxim/:id/', array(
+        $editPatientMaxim = new Zend_Controller_Router_Route(
+                'patient/editmaxim/:id', array(
             'controller' => 'patient',
             'action' => 'editmaxim',
             'id' => 'id'));
 
         // add this route to the front controller 
-        $frontController->getRouter()->addRoute('editPatientMaxim', $route);
+        $frontController->getRouter()->addRoute('editPatientMaxim', $editPatientMaxim);
     }
 
 }

@@ -16,7 +16,7 @@ class MaximController extends Zend_Controller_Action {
     public function indexAction() {
         $this->view->jQuery()->addJavascriptFile('/js/datatable/jquery.dataTables.min.js')
                 ->addJavascriptFile('/js/datatable/dataTable.fnReloadAjax.js')
-                ->addJavascriptFile('/js/MaximTable.js')
+                ->addJavascriptFile('/js/maxim/MaximTable.js')
                 ->addStylesheet('/css/jquery.dataTables.css');
 
 

@@ -114,8 +114,8 @@ class Application_Model_Patient {
      * Liefert die Daten des Objekts als Array zurueck fuer jDataTable
      */
 
-    public function getArray() {
-        return array($this->getId(), $this->getUserID_fk(), $this->getFirstname(), $this->getLastname(), $this->getBirthdate(), $this->getEmail(), $this->getUsername());
+    public function getPatientTableArray() {
+        return array($this->getId(), $this->getFirstname(), $this->getLastname(), $this->getBirthdate(), $this->getEmail(), $this->getUsername());
     }
 
     /*

@@ -66,7 +66,7 @@ class PatientController extends Zend_Controller_Action {
 
         $json = array();
         foreach ($daten as $value) {
-            $json[] = $value->getArray();
+            $json[] = $value->getPatientTableArray();
         }
 
         $this->view->aaData = $json;
@@ -77,16 +77,24 @@ class PatientController extends Zend_Controller_Action {
         $this->view->jQuery()->addJavascriptFile('/js/datatable/jquery.dataTables.min.js');
         $this->view->jQuery()->addStylesheet('/css/jquery.dataTables.css');
 
-        $this->view->jQuery()->addJavascriptFile('/js/PatientTable.js');
+        $this->view->jQuery()->addJavascriptFile('/js/patient/PatientTable.js');
     }
 
     public function editmaximAction() {
+        $this->view->jQuery()->addJavascriptFile('/js/datatable/jquery.dataTables.min.js')
+                ->addJavascriptFile('/js/patient/PatientMaximTable.js')
+                ->addStylesheet('/css/jquery.dataTables.css');
+        // Bisher zugeordnete Sprueche holen
         $patientID = $this->getParam('id');
         $patientMapper = new Application_Model_PatientMapper();
-        $patientMapper->getMaximsFromPatient($patientID);
-        
-        
+        $maximsFromPatient = $patientMapper->getMaximsFromPatient($patientID);
+
+        // Alle Spruche fuer Anzeige holen
+        $mapper = new Application_Model_MaximMapper();
+        $maxims = $mapper->fetchAll();
+
+        $this->view->maximsFromPatient = $maximsFromPatient;
+        $this->view->maxims = $maxims;
     }
 
 }
-

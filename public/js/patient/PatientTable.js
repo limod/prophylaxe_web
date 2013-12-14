@@ -5,7 +5,7 @@ $(document).ready(function() {
 
 function PatientTable() {
 
-    var _editButton = $('<button>Edit</button>');
+    
     var initialize = function() {
         $("#patient_edit_table").dataTable({
             "bProcessing": true,
@@ -49,7 +49,7 @@ function PatientTable() {
                     },
                     "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                         var a = $(nTd).find("a");
-                        a.attr("href", "/patient/editMaxim/" + oData[0]);
+                        a.attr("href", "/patient/editmaxim/" + oData[0]);
                     }
                 },
                 {// Spalte Ablenkung
