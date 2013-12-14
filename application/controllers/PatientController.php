@@ -22,6 +22,7 @@ class PatientController extends Zend_Controller_Action {
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
                 $patient = new Application_Model_Patient($form->getValues());
+                $patient->setUserID_fk(Zend_Auth::getInstance()->getStorage()->read()->userID);
                 $mapper = new Application_Model_PatientMapper();
                 $mapper->save($patient);
                 return $this->_helper->redirector('index');
@@ -50,7 +51,7 @@ class PatientController extends Zend_Controller_Action {
         } else {
             $patient = new Application_Model_Patient();
             $mapper = new Application_Model_PatientMapper();
-            $mapper->find($patientID, $patient, 'array');
+            $mapper->find($patientID, $patient);
 
 
             $form->populate($patient->getKeyValueArray());
@@ -59,12 +60,7 @@ class PatientController extends Zend_Controller_Action {
         $this->view->form = $form;
     }
 
-    /*
-     * Liefert alle Patienten als JSON-Format fuer PatientTable.js
-     */
-
     public function getpatientsAction() {
-
         $patienten = new Application_Model_PatientMapper();
         $daten = $patienten->fetchAll();
 
@@ -82,6 +78,14 @@ class PatientController extends Zend_Controller_Action {
         $this->view->jQuery()->addStylesheet('/css/jquery.dataTables.css');
 
         $this->view->jQuery()->addJavascriptFile('/js/PatientTable.js');
+    }
+
+    public function editmaximAction() {
+        $patientID = $this->getParam('id');
+        $patientMapper = new Application_Model_PatientMapper();
+        $patientMapper->getMaximsFromPatient($patientID);
+        
+        
     }
 
 }

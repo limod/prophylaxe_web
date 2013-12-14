@@ -8,12 +8,12 @@ class Application_Model_DbTable_MaximHasPatient extends Zend_Db_Table_Abstract {
     protected $_referenceMap = array(
         'Maxim' => array(
             'columns' => 'maxim_maximID',
-            'refTableClass' => 'Maxim',
+            'refTableClass' => 'Application_Model_DbTable_Maxim',
             'refColumns' => 'maximID'
         ),
         'Patient' => array(
             'columns' => 'patient_patientID',
-            'refTableClass' => 'Patient',
+            'refTableClass' => 'Application_Model_DbTable_Patient',
             'refColumns' => 'patientID'
     ));
 

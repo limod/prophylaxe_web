@@ -17,6 +17,7 @@
           <actionMethod actionName="edit"/>
           <actionMethod actionName="getpatients"/>
           <actionMethod actionName="list"/>
+          <actionMethod actionName="editMaxim"/>
         </controllerFile>
         <controllerFile controllerName="Auth">
           <actionMethod actionName="index"/>
@@ -56,11 +57,13 @@
           <dbTableFile dbTableName="Patient"/>
           <dbTableFile dbTableName="Maxim"/>
           <dbTableFile dbTableName="MaximHasPatient"/>
+          <dbTableFile dbTableName="User"/>
         </dbTableDirectory>
         <modelFile modelName="PatientMapper"/>
         <modelFile modelName="Patient"/>
         <modelFile modelName="Maxim"/>
         <modelFile modelName="MaximHasPatient"/>
+        <modelFile modelName="User"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
@@ -129,6 +132,9 @@
           <viewControllerScriptsDirectory forControllerName="Maxim">
             <viewScriptFile forActionName="delete"/>
           </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Patient">
+            <viewScriptFile forActionName="editMaxim"/>
+          </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
         <viewFiltersDirectory enabled="false"/>
@@ -172,6 +178,7 @@
             <testApplicationActionMethod forActionName="edit"/>
             <testApplicationActionMethod forActionName="getpatients"/>
             <testApplicationActionMethod forActionName="list"/>
+            <testApplicationActionMethod forActionName="editMaxim"/>
           </testApplicationControllerFile>
           <testApplicationControllerFile forControllerName="Auth">
             <testApplicationActionMethod forActionName="index"/>

@@ -8,6 +8,7 @@ class Application_Model_Patient {
     protected $_user_name;
     protected $_birth_date;
     protected $_email;
+    protected $_userID_fk;
 
     public function __construct(array $options = null) {
         if (is_array($options)) {
@@ -100,12 +101,21 @@ class Application_Model_Patient {
         return $this->_id;
     }
 
+    public function setUserID_fk($userid_fk) {
+        $this->_userID_fk = (int) $userid_fk;
+        return $this;
+    }
+
+    public function getUserID_fk() {
+        return $this->_userID_fk;
+    }
+
     /*
      * Liefert die Daten des Objekts als Array zurueck fuer jDataTable
      */
 
     public function getArray() {
-        return array($this->getId(), $this->getFirstname(), $this->getLastname(), $this->getBirthdate(), $this->getEmail(), $this->getUsername());
+        return array($this->getId(), $this->getUserID_fk(), $this->getFirstname(), $this->getLastname(), $this->getBirthdate(), $this->getEmail(), $this->getUsername());
     }
 
     /*
@@ -119,7 +129,8 @@ class Application_Model_Patient {
             'lastname' => $this->getLastname(),
             'username' => $this->getUsername(),
             'birthdate' => $this->getBirthdate(),
-            'email' => $this->getEmail());
+            'email' => $this->getEmail(),
+            'userID_fk' => $this->getUserID_fk());
     }
 
 }

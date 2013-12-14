@@ -29,6 +29,7 @@ class Application_Model_PatientMapper {
             'user_name' => $patient->getUsername(),
             'birth_date' => $patient->getBirthdate(),
             'email' => $patient->getEmail(),
+            'userID_fk' => $patient->getUserID_fk(),
         );
 
         if (null === ($id = $patient->getId())) {
@@ -39,8 +40,11 @@ class Application_Model_PatientMapper {
         }
     }
 
-    public function find($id, Application_Model_Patient $patient) {
-        $result = $this->getDbTable()->find($id);
+    public function find($id, Application_Model_Patient $patient = null) {
+        $result = $this->getDbTable()->find($id)->current();
+        if($patient == null)
+            return $result;
+        
         if (0 == count($result)) {
             return;
         }
@@ -50,29 +54,54 @@ class Application_Model_PatientMapper {
                 ->setLastname($row->last_name)
                 ->setUsername($row->user_name)
                 ->setBirthdate($row->birth_date)
-                ->setEmail($row->email);
+                ->setEmail($row->email)
+                ->setUserID_fk($row->userID_fk);
     }
 
-    public function fetchAll() {       
-        $resultSet = $this->getDbTable()->fetchAll();
+    public function fetchAll() {
+//         $select = $users->select()
+//                        ->where('username = ?', $this->username),
+//                        ->where('password = ?', md5($this->password));
+//        $user = $users->fetchRow($select);
+// 
+        // Daten des eingeloggten Benutzers lesen, nur Admin darf alle Patienten sehen
+        $userStorage = Zend_Auth::getInstance()->getStorage()->read();
+        $user = new Application_Model_User((array) $userStorage);
+
+        if (($user->getUser_role() === "admin")) {
+            $patients = $this->getDbTable()->fetchAll();
+        } else {
+            // Nur Patienten filtern die vom eingloggten User angelegt wurden
+            $userMapper = new Application_Model_UserMapper();
+            $userRow = $userMapper->find($user->getUserID())->current(); // Aktuelle Row mit current()
+            $patients = $userRow->findDependentRowset('Application_Model_DbTable_Patient');
+        }
+
+
+//      $where = $this->getDbTable()->getAdapter()->quoteInto('userID_fk = ?', $user->userID);
+//      $resultSet = $this->getDbTable()->fetchAll($where);
+
         $entries = array();
-        // where Zend_Auth::getInstance()->getStorage()->read()->userID = userId_fk
-        foreach ($resultSet as $row) {
+        foreach ($patients as $row) {
             $entry = new Application_Model_Patient();
             $entry->setId($row->patientID)
                     ->setFirstname($row->first_name)
                     ->setLastname($row->last_name)
                     ->setUsername($row->user_name)
                     ->setBirthdate($row->birth_date)
-                    ->setEmail($row->email);
+                    ->setEmail($row->email)
+                    ->setUserID_fk($row->userID_fk);
+
             $entries[] = $entry;
         }
         return $entries;
     }
-    
-    
-    
-    
 
+    public function getMaximsFromPatient($patientID){
+        $patientRow = $this->find($patientID);
+        $result = $patientRow->findDependentRowset('Application_Model_DbTable_Maxim');
+        
+        return $result;
+    }
 }
 

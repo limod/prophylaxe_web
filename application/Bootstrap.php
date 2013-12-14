@@ -45,7 +45,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
         $menuContainerConfig = new Zend_Config_Xml(APPLICATION_PATH . '/configs/menu.xml', 'nav');
         $menuContainer = new Zend_Navigation($menuContainerConfig);
-        
+
 
 
         $view->navigation($menuContainer)->setAcl($this->_acl)
@@ -70,7 +70,16 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             'id' => 'id'));
 
         // add this route to the front controller 
-        $frontController->getRouter()->addRoute('test', $route);
+        $frontController->getRouter()->addRoute('editPatient', $route);
+
+        $route = new Zend_Controller_Router_Route(
+                'patient/editmaxim/:id/', array(
+            'controller' => 'patient',
+            'action' => 'editmaxim',
+            'id' => 'id'));
+
+        // add this route to the front controller 
+        $frontController->getRouter()->addRoute('editPatientMaxim', $route);
     }
 
 }

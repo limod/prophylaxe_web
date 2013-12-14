@@ -11,6 +11,9 @@ class Application_Form_Patient extends Zend_Form {
         $this->addElement('hidden', 'id', array(           
                
         ));
+        $this->addElement('hidden', 'userID_fk', array(           
+               
+        ));
         
         // Ein Email Element hinzufügen
         $this->addElement('text', 'firstname', array(
