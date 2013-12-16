@@ -18,6 +18,7 @@
           <actionMethod actionName="getpatients"/>
           <actionMethod actionName="list"/>
           <actionMethod actionName="editMaxim"/>
+          <actionMethod actionName="saveMaxim"/>
         </controllerFile>
         <controllerFile controllerName="Auth">
           <actionMethod actionName="index"/>
@@ -134,6 +135,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Patient">
             <viewScriptFile forActionName="editMaxim"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Patient">
+            <viewScriptFile forActionName="saveMaxim"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

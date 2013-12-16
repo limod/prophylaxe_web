@@ -66,7 +66,6 @@ function PatientMaximTable() {
 
     };
 
-
     var isIn = function(id) {
         rows = _maximsOfPatient.find('tr');
         for (var i = 0; i < rows.length; i++) {
@@ -76,7 +75,6 @@ function PatientMaximTable() {
         }
         return false;
     };
-
 
     var btnRemoveClick = function() {
 
@@ -88,7 +86,24 @@ function PatientMaximTable() {
     };
 
     var btnSubmitClick = function() {
-        
+
+        var maxim_ids = new Array();
+
+        _maximsOfPatient.find('tr').each(function(index,value) {
+            maxim_ids.push($(value).attr('maximid'));
+        });
+
+        $.ajax({
+            type: "post",
+            url: '/patient/save-maxim/format/json',
+            async: false,
+            data: {maxim_ids: maxim_ids},
+            success: function(data) {
+                window.location.href = data.redirect;
+
+            }
+        });
+
     };
 
     initialize();

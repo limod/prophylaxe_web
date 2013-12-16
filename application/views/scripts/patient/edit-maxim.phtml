@@ -3,6 +3,14 @@
 
     <div>
         <table border="1" id="patient_has_maxims">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Text</th>
+                    <th>Entfernen</th>
+                </tr>
+            </thead>
+            
             <?php foreach ($this->maximsFromPatient as $key => $val): ?>
                 <tr maximid="<?php echo $val->getId(); ?>">
                     <td>
@@ -24,6 +32,7 @@
     </div>
     
     <p>
+        <br/>
         <button id="btnSubmit" type="button" class="btn btn-primary">Daten Übernehmen</button>
     </p>
 

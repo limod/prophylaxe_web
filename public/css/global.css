@@ -10,8 +10,8 @@ Description:
 html, body {
     /*background-color: #eee;*/
     background-color: #E5E5E5;
-    background-image: -moz-linear-gradient(center top , #F5F5F5 0%, #BDBDBD 100%);
-    background-repeat: repeat-x;
+    /*background-image: -moz-linear-gradient(center top , #F5F5F5 0%, #BDBDBD 100%);*/
+    /*background-repeat: repeat-x;*/
     height: 100%;
 }
 #header {
@@ -19,11 +19,17 @@ html, body {
 }
 .container{
     /*background-color: lightblue;*/
+    
+    -moz-box-shadow:    0px 0px 6px 6px #ccc;
+    -webkit-box-shadow: 0px 0px 6px 6px #ccc;
+    box-shadow:         0px 0px 6px 6px #ccc;
 }
 
 .content {
     margin-top:20px;
     /*min-height: 100%;*/
+
+
 
 }
 
@@ -32,6 +38,7 @@ html, body {
     height: 100%;
     min-height: 100%;
     display:block;
+
 }
 
 .head_title{
@@ -211,7 +218,7 @@ Login Ende
 /*
     Maxim Start
 */
-#maxim_table .maxim_table_edit_column, .maxim_table_delete_column{
+#maxim_table .maxim_table_edit_column, .maxim_table_delete_column, .patient_edit_table_column{
     text-align:center;
 }
 
@@ -223,3 +230,15 @@ Login Ende
     Maxim Ende
 */
 
+
+/*
+edit-maxim Start
+*/
+
+#patient_has_maxims{
+    width:100%;
+}
+
+/*
+edit-maxim Ende
+*/

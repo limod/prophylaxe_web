@@ -6,6 +6,8 @@ class PatientController extends Zend_Controller_Action {
         $contextSwitch = $this->_helper->getHelper('contextSwitch');
         $contextSwitch->addActionContext('getpatients', 'json')
                 ->initContext();
+        $contextSwitch->addActionContext('save-maxim', 'json')
+                ->initContext();
     }
 
     public function indexAction() {
@@ -80,7 +82,7 @@ class PatientController extends Zend_Controller_Action {
         $this->view->jQuery()->addJavascriptFile('/js/patient/PatientTable.js');
     }
 
-    public function editmaximAction() {
+    public function editMaximAction() {
         $this->view->jQuery()->addJavascriptFile('/js/datatable/jquery.dataTables.min.js')
                 ->addJavascriptFile('/js/patient/PatientMaximTable.js')
                 ->addStylesheet('/css/jquery.dataTables.css');
@@ -93,8 +95,32 @@ class PatientController extends Zend_Controller_Action {
         $mapper = new Application_Model_MaximMapper();
         $maxims = $mapper->fetchAll();
 
+        // Patient ID speichern
+//        Zend_Registry::set('patientID',$patientID);
+        $ns = new Zend_Session_Namespace('edit-maxim');
+        $ns->patient_id = $patientID;
+
         $this->view->maximsFromPatient = $maximsFromPatient;
         $this->view->maxims = $maxims;
+    }
+
+    public function saveMaximAction() {
+        $request = $this->getRequest()->getPost('maxim_ids');
+        // Gespeicherte Patient ID holen
+//        $patientID = Zend_Registry::get('patientID');
+        $ns = new Zend_Session_Namespace('edit-maxim');
+        $patientID = $ns->patient_id;
+
+//        $maximHasPatientObject = array();
+//        foreach ($request as $value) {
+//            $maximHasPatientObject[] = new Application_Model_MaximHasPatient(array('maximid' => $value, 'patientid' => $patientID));
+//        }
+
+        $maximHasPatientMapper = new Application_Model_MaximHasPatientMapper();
+        $maximHasPatientMapper->saveAll($patientID, $request);
+
+
+        $this->view->redirect = "/patient/list";
     }
 
 }

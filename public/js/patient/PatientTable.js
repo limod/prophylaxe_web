@@ -5,7 +5,7 @@ $(document).ready(function() {
 
 function PatientTable() {
 
-    
+
     var initialize = function() {
         $("#patient_edit_table").dataTable({
             "bProcessing": true,
@@ -19,8 +19,9 @@ function PatientTable() {
                 {"mData": 5},
                 {// Spalte bearbeiten
                     "mData": null,
+                    "sClass": "patient_edit_table_column",
                     "mRender": function(data) {
-                        var button = '<a><button type="button" class="btn btn-primary">Bearbeiten</button></a>';
+                        var button = '<a><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></button></a>';
                         return button;
                     },
                     "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
@@ -31,31 +32,34 @@ function PatientTable() {
                 },
                 {// Spalte Notfallkoffer
                     "mData": null,
+                    "sClass": "patient_edit_table_column",
                     "mRender": function(data) {
-                        var button = '<a><button type="button" class="btn btn-primary">Bearbeiten</button></a>';
+                        var button = '<a><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></button></a>';
                         return button;
                     },
                     "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                         var a = $(nTd).find("a");
-                        a.attr("href", "/patient/editMaxim/" + oData[0]);
+                        a.attr("href", "/patient/edit-maxim/" + oData[0]);
                     }
 
                 },
                 {// Spalte Sprueche
                     "mData": null,
+                    "sClass": "patient_edit_table_column",
                     "mRender": function(data) {
-                        var button = '<a><button type="button" class="btn btn-primary">Bearbeiten</button></a>';
+                        var button = '<a><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></button></a>';
                         return button;
                     },
                     "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                         var a = $(nTd).find("a");
-                        a.attr("href", "/patient/editmaxim/" + oData[0]);
+                        a.attr("href", "/patient/edit-maxim/" + oData[0]);
                     }
                 },
                 {// Spalte Ablenkung
                     "mData": null,
+                    "sClass": "patient_edit_table_column",
                     "mRender": function(data) {
-                        var button = '<a><button type="button" class="btn btn-primary">Bearbeiten</button></a>';
+                        var button = '<a><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></button></a>';
                         return button;
                     },
                     "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
