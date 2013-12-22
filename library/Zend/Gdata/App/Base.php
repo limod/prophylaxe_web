@@ -118,7 +118,7 @@ abstract class Zend_Gdata_App_Base
      *
      * @return string Child text node
      */
-    public function getText($trim = true)
+    public function getEmotion($trim = true)
     {
         if ($trim) {
             return trim($this->_text);
@@ -566,7 +566,7 @@ abstract class Zend_Gdata_App_Base
      */
     public function __toString()
     {
-        return $this->getText();
+        return $this->getEmotion();
     }
 
 }

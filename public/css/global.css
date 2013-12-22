@@ -29,8 +29,6 @@ html, body {
     margin-top:20px;
     /*min-height: 100%;*/
 
-
-
 }
 
 .main_content{
@@ -51,20 +49,7 @@ html, body {
     min-height: 100%;
 }
 
-/*
-Login Start
-*/
-.login_form_wrapper{
-    margin-top:100px;
-}
 
-.login_form_password{
-    margin-top:10px;
-}
-
-/*
-Login Ende
-*/
 
 
 /*
@@ -218,7 +203,7 @@ Login Ende
 /*
     Maxim Start
 */
-#maxim_table .maxim_table_edit_column, .maxim_table_delete_column, .patient_edit_table_column{
+#maxim_table .maxim_table_edit_column, .maxim_table_delete_column, .patient_edit_table_column, .contactpoint_edit_table_column{
     text-align:center;
 }
 
@@ -241,4 +226,24 @@ edit-maxim Start
 
 /*
 edit-maxim Ende
+*/
+
+
+/*
+Patient Anlegen Formular Start
+*/
+
+#patient_form dt {
+  float:left;
+  clear:left;
+  width:120px;
+}
+ 
+#patient_form dd {
+  float:left;
+  width:200px;
+}
+
+/*
+Patient Anlegen Formular Ende
 */

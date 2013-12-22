@@ -634,7 +634,7 @@ class Zend_Gdata_Books_VolumeEntry extends Zend_Gdata_Entry
      */
     public function getVolumeId()
     {
-        $fullId = $this->getId()->getText();
+        $fullId = $this->getId()->getEmotion();
         $position = strrpos($fullId, '/');
         if ($position === false) {
             require_once 'Zend/Gdata/App/Exception.php';

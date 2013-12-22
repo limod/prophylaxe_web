@@ -31,17 +31,6 @@ class MaximController extends Zend_Controller_Action {
 //        $this->view->maxims = $mapper->fetchAll();
     }
 
-    public function editAction() {
-        // action body
-    }
-
-    public function createAction() {
-        // action body
-    }
-
-    public function listAction() {
-        
-    }
 
     public function getmaximsAction() {
         $mapper = new Application_Model_MaximMapper();

@@ -22,27 +22,6 @@ class Application_Model_MaximHasPatientMapper {
         return $this->_dbTable;
     }
 
-    public function save(Application_Model_Maxim $maxim) {
-        $data = array(
-            'maximID' => $maxim->getId(),
-            'text' => $maxim->getText(),
-        );
-
-        if (null === ($id = $maxim->getId())) {
-            unset($data['id']);
-            $this->getDbTable()->insert($data);
-        } else {
-
-//            $productsRowset = $this->getDbTable()->find($id);
-//            $maxim = $productsRowset->current();
-//            $maxim->setText("fuck you bitch");
-//            
-//            $maxim->save();
-
-            $this->getDbTable()->update($data, array('maximID = ?' => $id));
-        }
-    }
-
     public function saveAll($patientID, $maximids) {
 
         // Alle Spreuche des Patienten zuerst loeschen

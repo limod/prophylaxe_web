@@ -577,7 +577,7 @@ class Zend_Gdata_YouTube_VideoEntry extends Zend_Gdata_YouTube_MediaEntry
         if ($this->getMajorProtocolVersion() == 2) {
             $videoId = $this->getMediaGroup()->getVideoId()->text;
         } else {
-            $fullId = $this->getId()->getText();
+            $fullId = $this->getId()->getEmotion();
             $position = strrpos($fullId, '/');
             if ($position === false) {
                 require_once 'Zend/Gdata/App/Exception.php';
@@ -599,7 +599,7 @@ class Zend_Gdata_YouTube_VideoEntry extends Zend_Gdata_YouTube_MediaEntry
     {
         $recorded = $this->getRecorded();
         if ($recorded != null) {
-          return $recorded->getText();
+          return $recorded->getEmotion();
         } else {
           return null;
         }
@@ -650,7 +650,7 @@ class Zend_Gdata_YouTube_VideoEntry extends Zend_Gdata_YouTube_MediaEntry
     {
         $this->ensureMediaGroupIsNotNull();
         if ($this->getMediaGroup()->getTitle() != null) {
-            return $this->getMediaGroup()->getTitle()->getText();
+            return $this->getMediaGroup()->getTitle()->getEmotion();
         } else {
             return null;
         }
@@ -695,7 +695,7 @@ class Zend_Gdata_YouTube_VideoEntry extends Zend_Gdata_YouTube_MediaEntry
     {
         $this->ensureMediaGroupIsNotNull();
         if ($this->getMediaGroup()->getDescription() != null) {
-            return $this->getMediaGroup()->getDescription()->getText();
+            return $this->getMediaGroup()->getDescription()->getEmotion();
         } else {
             return null;
         }
@@ -834,7 +834,7 @@ class Zend_Gdata_YouTube_VideoEntry extends Zend_Gdata_YouTube_MediaEntry
         if ($this->getMediaGroup()->getKeywords() != null) {
 
             $keywords = $this->getMediaGroup()->getKeywords();
-            $keywordsString = $keywords->getText();
+            $keywordsString = $keywords->getEmotion();
             if (strlen(trim($keywordsString)) > 0) {
                 return preg_split('/(, *)|,/', $keywordsString);
             }
@@ -938,7 +938,7 @@ class Zend_Gdata_YouTube_VideoEntry extends Zend_Gdata_YouTube_MediaEntry
         if ($categories != null) {
             foreach($categories as $category) {
                 if ($category->getScheme() == self::YOUTUBE_CATEGORY_SCHEMA) {
-                    return $category->getText();
+                    return $category->getEmotion();
                 }
             }
         }
@@ -976,7 +976,7 @@ class Zend_Gdata_YouTube_VideoEntry extends Zend_Gdata_YouTube_MediaEntry
             foreach ($categoryArray as $category) {
                 if ($category instanceof Zend_Gdata_Media_Extension_MediaCategory) {
                     if ($category->getScheme() == self::YOUTUBE_DEVELOPER_TAGS_SCHEMA) {
-                        $developerTags[] = $category->getText();
+                        $developerTags[] = $category->getEmotion();
                     }
                 }
             }
@@ -1031,7 +1031,7 @@ class Zend_Gdata_YouTube_VideoEntry extends Zend_Gdata_YouTube_MediaEntry
         $control = $this->getControl();
         if ($control != null &&
             $control->getDraft() != null &&
-            $control->getDraft()->getText() == 'yes') {
+            $control->getDraft()->getEmotion() == 'yes') {
 
             return $control->getState();
         }

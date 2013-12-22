@@ -227,6 +227,6 @@ class Zend_Gdata_YouTube_ActivityEntry extends Zend_Gdata_Entry
     public function getAuthorName()
     {
         $authors = $this->getAuthor();
-        return $authors[0]->getName()->getText();
+        return $authors[0]->getName()->getEmotion();
     }
 }

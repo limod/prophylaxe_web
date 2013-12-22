@@ -108,7 +108,7 @@ class Zend_Barcode_Object_Code39 extends Zend_Barcode_Object_ObjectAbstract
     {
         $quietZone       = $this->getQuietZone();
         $characterLength = (6 * $this->_barThinWidth + 3 * $this->_barThickWidth + 1) * $this->_factor;
-        $encodedData     = strlen($this->getText()) * $characterLength - $this->_factor;
+        $encodedData     = strlen($this->getEmotion()) * $characterLength - $this->_factor;
         return $quietZone + $encodedData + $quietZone;
     }
 
@@ -127,7 +127,7 @@ class Zend_Barcode_Object_Code39 extends Zend_Barcode_Object_ObjectAbstract
      * Retrieve text to display
      * @return string
      */
-    public function getText()
+    public function getEmotion()
     {
         return '*' . parent::getText() . '*';
     }
@@ -152,7 +152,7 @@ class Zend_Barcode_Object_Code39 extends Zend_Barcode_Object_ObjectAbstract
      */
     protected function _prepareBarcode()
     {
-        $text         = str_split($this->getText());
+        $text         = str_split($this->getEmotion());
         $barcodeTable = array();
         foreach ($text as $char) {
             $barcodeChar = str_split($this->_codingMap[$char]);

@@ -89,7 +89,7 @@ function PatientMaximTable() {
 
         var maxim_ids = new Array();
 
-        _maximsOfPatient.find('tr').each(function(index,value) {
+        _maximsOfPatient.find('tbody tr').each(function(index,value) {
             maxim_ids.push($(value).attr('maximid'));
         });
 

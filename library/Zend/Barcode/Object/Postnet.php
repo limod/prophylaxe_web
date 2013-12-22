@@ -82,7 +82,7 @@ class Zend_Barcode_Object_Postnet extends Zend_Barcode_Object_ObjectAbstract
         $quietZone       = $this->getQuietZone();
         $startCharacter  = (2 * $this->_barThinWidth) * $this->_factor;
         $stopCharacter   = (1 * $this->_barThinWidth) * $this->_factor;
-        $encodedData     = (10 * $this->_barThinWidth) * $this->_factor * strlen($this->getText());
+        $encodedData     = (10 * $this->_barThinWidth) * $this->_factor * strlen($this->getEmotion());
         return $quietZone + $startCharacter + $encodedData + $stopCharacter + $quietZone;
     }
 
@@ -106,7 +106,7 @@ class Zend_Barcode_Object_Postnet extends Zend_Barcode_Object_ObjectAbstract
         $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , 1);
 
         // Text to encode
-        $textTable = str_split($this->getText());
+        $textTable = str_split($this->getEmotion());
         foreach ($textTable as $char) {
             $bars = str_split($this->_codingMap[$char]);
             foreach ($bars as $b) {

@@ -151,7 +151,7 @@ abstract class Zend_Pdf_Annotation
      *
      * @return string
      */
-    public function getText() {
+    public function getEmotion() {
         if ($this->_annotationDictionary->Contents === null) {
             return '';
         }

@@ -127,7 +127,7 @@ class Zend_Gdata_YouTube_Extension_Link extends Zend_Gdata_App_Extension_Link
     */
     public function getTokenValue()
     {
-      return $this->getToken()->getText();
+      return $this->getToken()->getEmotion();
     }
 
 }

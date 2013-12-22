@@ -190,7 +190,7 @@ class Zend_Barcode_Object_Code128 extends Zend_Barcode_Object_ObjectAbstract
         $quietZone = $this->getQuietZone();
         // Each characters contain 11 bars...
         $characterLength = 11 * $this->_barThinWidth * $this->_factor;
-        $convertedChars = count($this->_convertToBarcodeChars($this->getText()));
+        $convertedChars = count($this->_convertToBarcodeChars($this->getEmotion()));
         if ($this->_withChecksum) {
             $convertedChars++;
         }
@@ -217,10 +217,10 @@ class Zend_Barcode_Object_Code128 extends Zend_Barcode_Object_ObjectAbstract
     {
         $barcodeTable = array();
 
-        $convertedChars = $this->_convertToBarcodeChars($this->getText());
+        $convertedChars = $this->_convertToBarcodeChars($this->getEmotion());
 
         if ($this->_withChecksum) {
-            $convertedChars[] = $this->getChecksum($this->getText());
+            $convertedChars[] = $this->getChecksum($this->getEmotion());
         }
 
         // STOP CHARACTER
@@ -350,7 +350,7 @@ class Zend_Barcode_Object_Code128 extends Zend_Barcode_Object_ObjectAbstract
      * Retrieve text to encode
      * @return string
      */
-    public function getText()
+    public function getEmotion()
     {
         return $this->_text;
     }

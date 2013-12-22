@@ -558,7 +558,7 @@ abstract class Zend_Barcode_Object_ObjectAbstract
      * Retrieve text to encode
      * @return string
      */
-    public function getText()
+    public function getEmotion()
     {
         $text = $this->_text;
         if ($this->_withChecksum) {
@@ -606,7 +606,7 @@ abstract class Zend_Barcode_Object_ObjectAbstract
     public function getTextToDisplay()
     {
         if ($this->_withChecksumInText) {
-            return $this->getText();
+            return $this->getEmotion();
         } else {
             return $this->_addLeadingZeros($this->_text, true);
         }

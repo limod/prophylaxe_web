@@ -80,7 +80,7 @@ class Zend_Barcode_Object_Upca extends Zend_Barcode_Object_Ean13
         $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , $height);
         $barcodeTable[] = array(1 , $this->_barThinWidth , 0 , $height);
 
-        $textTable = str_split($this->getText());
+        $textTable = str_split($this->getEmotion());
 
         // First character
         $bars = str_split($this->_codingMap['A'][$textTable[0]]);

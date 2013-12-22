@@ -81,7 +81,7 @@ class Zend_Barcode_Object_Upce extends Zend_Barcode_Object_Ean13
      * Retrieve text to encode
      * @return string
      */
-    public function getText()
+    public function getEmotion()
     {
         $text = parent::getText();
         if ($text{0} != 1) {
@@ -117,7 +117,7 @@ class Zend_Barcode_Object_Upce extends Zend_Barcode_Object_Ean13
         $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , $height);
         $barcodeTable[] = array(1 , $this->_barThinWidth , 0 , $height);
 
-        $textTable = str_split($this->getText());
+        $textTable = str_split($this->getEmotion());
         $system = 0;
         if ($textTable[0] == 1) {
             $system = 1;

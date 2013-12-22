@@ -59,6 +59,6 @@ class Zend_Barcode_Object_Leitcode extends Zend_Barcode_Object_Identcode
     {
         return preg_replace('/([0-9]{5})([0-9]{3})([0-9]{3})([0-9]{2})([0-9])/',
                             '$1.$2.$3.$4 $5',
-                            $this->getText());
+                            $this->getEmotion());
     }
 }

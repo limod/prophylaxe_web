@@ -522,7 +522,7 @@ abstract class Zend_Gdata_App_FeedEntryParent extends Zend_Gdata_App_Base
     public function getTitleValue()
     {
         if (($titleObj = $this->getTitle()) != null) {
-            return $titleObj->getText();
+            return $titleObj->getEmotion();
         } else {
             return null;
         }

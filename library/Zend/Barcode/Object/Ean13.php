@@ -120,7 +120,7 @@ class Zend_Barcode_Object_Ean13 extends Zend_Barcode_Object_ObjectAbstract
         $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , $height);
         $barcodeTable[] = array(1 , $this->_barThinWidth , 0 , $height);
 
-        $textTable = str_split($this->getText());
+        $textTable = str_split($this->getEmotion());
         $parity = $this->_parities[$textTable[0]];
 
         // First part

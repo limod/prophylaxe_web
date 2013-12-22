@@ -127,7 +127,7 @@ class Zend_Gdata_YouTube_Extension_Control extends Zend_Gdata_App_Extension_Cont
     */
     public function getStateValue()
     {
-      return $this->getState()->getText();
+      return $this->getState()->getEmotion();
     }
 
 }

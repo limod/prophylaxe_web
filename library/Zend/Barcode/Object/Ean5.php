@@ -92,7 +92,7 @@ class Zend_Barcode_Object_Ean5 extends Zend_Barcode_Object_Ean13
         $barcodeTable[] = array(1 , $this->_barThinWidth , 0 , 1);
 
         $firstCharacter = true;
-        $textTable = str_split($this->getText());
+        $textTable = str_split($this->getEmotion());
 
         // Characters
         for ($i = 0; $i < $this->_barcodeLength; $i++) {
@@ -132,7 +132,7 @@ class Zend_Barcode_Object_Ean5 extends Zend_Barcode_Object_Ean13
 
     protected function _getParity($i)
     {
-        $checksum = $this->getChecksum($this->getText());
+        $checksum = $this->getChecksum($this->getEmotion());
         return $this->_parities[$checksum][$i];
     }
 
@@ -140,7 +140,7 @@ class Zend_Barcode_Object_Ean5 extends Zend_Barcode_Object_Ean13
      * Retrieve text to encode
      * @return string
      */
-    public function getText()
+    public function getEmotion()
     {
         return $this->_addLeadingZeros($this->_text);
     }

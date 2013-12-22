@@ -380,7 +380,7 @@ class Zend_Gdata_Spreadsheets extends Zend_Gdata
             $rowContents = array();
             $customArray = $listEntry->getCustom();
             foreach ($customArray as $custom) {
-                $rowContents[$custom->getColumnName()] = $custom->getText();
+                $rowContents[$custom->getColumnName()] = $custom->getEmotion();
             }
             $spreadsheetContents[] = $rowContents;
         }
@@ -425,8 +425,8 @@ class Zend_Gdata_Spreadsheets extends Zend_Gdata
             $cellContents = array();
             $cell = $cellEntry->getCell();
             $cellContents['formula'] = $cell->getInputValue();
-            $cellContents['value'] = $cell->getText();
-            $spreadsheetContents[$cellEntry->getTitle()->getText()] = $cellContents;
+            $cellContents['value'] = $cell->getEmotion();
+            $spreadsheetContents[$cellEntry->getTitle()->getEmotion()] = $cellContents;
         }
         return $spreadsheetContents;
     }
