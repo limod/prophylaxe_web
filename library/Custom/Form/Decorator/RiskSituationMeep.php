@@ -1,6 +1,6 @@
 <?php
 
-class Custom_Decorator_RiskSituation extends Zend_Form_Decorator_Abstract {
+class Custom_Form_Decorator_RiskSituationMeep extends Zend_Form_Decorator_Abstract {
     
     protected $_format = '<input id="%s" name="%s" type="text" value="%s"/><button name="btnRemove" type="button" class="btn btn-warning"><span class="glyphicon glyphicon-minus"></span></button>';
 

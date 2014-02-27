@@ -1,11 +1,10 @@
 <?php
 
-class Application_Model_EcRiskSituation {
+class Application_Model_EmergencyCase_EcLimitRelapse {
 
     protected $_elrID;
     protected $_text;
     protected $_ecID_fk;
-    
 
     public function __construct(array $options = null) {
         if (is_array($options)) {
@@ -40,13 +39,16 @@ class Application_Model_EcRiskSituation {
         return $this;
     }
 
-    
     public function getElrID() {
-        return $this->_elrid;
+        return $this->_elrID;
     }
 
     public function setElrID($_elrid) {
-        $this->_elrid = $_elrid;
+        if ($_elrid > 0) {
+            $this->_elrID = (int) $_elrid;
+        } else {
+            $this->_elrID = null;
+        }
         return $this;
     }
 
@@ -67,11 +69,9 @@ class Application_Model_EcRiskSituation {
         $this->_ecID_fk = $_ecID_fk;
         return $this;
     }
-    
+
     public function getArray() {
         return array($this->getElrID(), $this->getText(), $this->getEcID_fk());
     }
 
-
 }
-

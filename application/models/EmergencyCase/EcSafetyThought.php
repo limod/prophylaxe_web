@@ -1,9 +1,10 @@
 <?php
 
-class Application_Model_Maxim {
+class Application_Model_EmergencyCase_EcSafetyThought {
 
-    protected $_maximID;
+    protected $_estID;
     protected $_text;
+    protected $_ecID_fk;
 
     public function __construct(array $options = null) {
         if (is_array($options)) {
@@ -14,7 +15,7 @@ class Application_Model_Maxim {
     public function __set($name, $value) {
         $method = 'set' . $name;
         if (('mapper' == $name) || !method_exists($this, $method)) {
-            throw new Exception('Ungültige Maxim Eigenschaft');
+            throw new Exception('Ungültige EcRiskSituation Eigenschaft');
         }
         $this->$method($value);
     }
@@ -22,7 +23,7 @@ class Application_Model_Maxim {
     public function __get($name) {
         $method = 'get' . $name;
         if (('mapper' == $name) || !method_exists($this, $method)) {
-            throw new Exception('Ungültige Maxim Eigenschaft');
+            throw new Exception('Ungültige EcRiskSituation Eigenschaft');
         }
         return $this->$method();
     }
@@ -38,8 +39,16 @@ class Application_Model_Maxim {
         return $this;
     }
 
-    public function setText($text) {
-        $this->_text = (string) $text;
+    public function getEstID() {
+        return $this->_estID;
+    }
+
+    public function setEstID($_estid) {
+        if ($_estid > 0) {
+            $this->_estID = (int) $_estid;
+        } else {
+            $this->_estID = null;
+        }
         return $this;
     }
 
@@ -47,22 +56,22 @@ class Application_Model_Maxim {
         return $this->_text;
     }
 
-    public function setId($id) {
-        if ($id > 0) {
-            $this->_maximID = (int) $id;
-        } else {
-            $this->_maximID = null;
-        }
+    public function setText($_text) {
+        $this->_text = $_text;
         return $this;
     }
 
-    public function getId() {
-        return $this->_maximID;
+    public function getEcID_fk() {
+        return $this->_ecID_fk;
     }
-    
-     public function getArray() {
-        return array($this->getId(), $this->getText());
+
+    public function setEcID_fk($_ecID_fk) {
+        $this->_ecID_fk = $_ecID_fk;
+        return $this;
+    }
+
+    public function getArray() {
+        return array($this->getEstID(), $this->getText(), $this->getEcID_fk());
     }
 
 }
-

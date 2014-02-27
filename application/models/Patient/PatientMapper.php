@@ -1,6 +1,6 @@
 <?php
 
-class Application_Model_PatientMapper {
+class Application_Model_Patient_PatientMapper {
 
     protected $_dbTable = null;
 
@@ -22,7 +22,9 @@ class Application_Model_PatientMapper {
         return $this->_dbTable;
     }
 
-    public function save(Application_Model_Patient $patient) {
+    public function save(Application_Model_Patient_Patient $patient) {
+        // Security Token erzeugen
+        $random_hash = substr(md5(uniqid(rand(), true)), 0, 10);
         $data = array(
             'first_name' => $patient->getFirstname(),
             'last_name' => $patient->getLastname(),
@@ -30,6 +32,7 @@ class Application_Model_PatientMapper {
             'birth_date' => $patient->getBirthdate(),
             'email' => $patient->getEmail(),
             'userID_fk' => $patient->getUserID_fk(),
+            'token' => $random_hash
         );
 
         if (null === ($id = $patient->getId())) {
@@ -40,7 +43,7 @@ class Application_Model_PatientMapper {
         }
     }
 
-    public function find($id, Application_Model_Patient $patient = null) {
+    public function find($id, Application_Model_Patient_Patient $patient = null) {
         $result = $this->getDbTable()->find($id);
         if ($patient == null)
             return $result->current();
@@ -55,7 +58,25 @@ class Application_Model_PatientMapper {
                 ->setUsername($row->user_name)
                 ->setBirthdate($row->birth_date)
                 ->setEmail($row->email)
-                ->setUserID_fk($row->userID_fk);
+                ->setUserID_fk($row->userID_fk)
+                ->setToken($row->token);
+    }
+
+    public function findByEmail($email, Application_Model_Patient_Patient $patient = null) {
+        $select = $this->getDbTable()->select();
+        $select->where('email = ?', $email);
+
+        $row = $this->getDbTable()->fetchAll($select);
+        $row = $patient->current();
+
+        $patient->setId($row->patientID)
+                ->setFirstname($row->first_name)
+                ->setLastname($row->last_name)
+                ->setUsername($row->user_name)
+                ->setBirthdate($row->birth_date)
+                ->setEmail($row->email)
+                ->setUserID_fk($row->userID_fk)
+                ->setToken($row->token);
     }
 
     public function fetchAll() {
@@ -83,14 +104,15 @@ class Application_Model_PatientMapper {
 
         $entries = array();
         foreach ($patients as $row) {
-            $entry = new Application_Model_Patient();
+            $entry = new Application_Model_Patient_Patient();
             $entry->setId($row->patientID)
                     ->setFirstname($row->first_name)
                     ->setLastname($row->last_name)
                     ->setUsername($row->user_name)
                     ->setBirthdate($row->birth_date)
                     ->setEmail($row->email)
-                    ->setUserID_fk($row->userID_fk);
+                    ->setUserID_fk($row->userID_fk)
+                    ->setToken($row->token);
 
             $entries[] = $entry;
         }

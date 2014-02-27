@@ -9,7 +9,6 @@
       <controllersDirectory>
         <controllerFile controllerName="Index">
           <actionMethod actionName="index"/>
-          <actionMethod actionName="getPatient"/>
         </controllerFile>
         <controllerFile controllerName="Error"/>
         <controllerFile controllerName="Patient">
@@ -52,10 +51,6 @@
           <actionMethod actionName="create"/>
           <actionMethod actionName="edit"/>
         </controllerFile>
-        <controllerFile controllerName="App">
-          <actionMethod actionName="index"/>
-          <actionMethod actionName="test"/>
-        </controllerFile>
       </controllersDirectory>
       <formsDirectory>
         <formFile formName="Patient"/>
@@ -84,8 +79,6 @@
           <dbTableFile dbTableName="EcLimitRelapse"/>
           <dbTableFile dbTableName="EcRiskSituation"/>
           <dbTableFile dbTableName="EcHelpPerson"/>
-          <dbTableFile dbTableName="EcSafetyAction"/>
-          <dbTableFile dbTableName="EcSafetyThought"/>
         </dbTableDirectory>
         <modelFile modelName="PatientMapper"/>
         <modelFile modelName="Patient"/>
@@ -100,11 +93,9 @@
         <modelFile modelName="EmergencyCase"/>
         <modelFile modelName="EcLimitRelapse"/>
         <modelFile modelName="EcRiskSituation"/>
-        <modelFile modelName="EcHelpPerson"/>
-        <modelFile modelName="EcSafetyThought"/>
-        <modelFile modelName="EcSafetyAction"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
+	  <servicesDirectory enabled="false"/>
       <viewsDirectory>
         <viewScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Index">
@@ -206,18 +197,6 @@
           <viewControllerScriptsDirectory forControllerName="EmergencyCase">
             <viewScriptFile forActionName="edit"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="App">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Index">
-            <viewScriptFile forActionName="getPatient"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="app">
-            <viewScriptFile forActionName="getPatient"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="App">
-            <viewScriptFile forActionName="test"/>
-          </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
         <viewFiltersDirectory enabled="false"/>
@@ -254,7 +233,6 @@
         <testApplicationControllerDirectory>
           <testApplicationControllerFile forControllerName="Index">
             <testApplicationActionMethod forActionName="index"/>
-            <testApplicationActionMethod forActionName="getPatient"/>
           </testApplicationControllerFile>
           <testApplicationControllerFile forControllerName="Patient">
             <testApplicationActionMethod forActionName="index"/>
@@ -294,10 +272,6 @@
             <testApplicationActionMethod forActionName="index"/>
             <testApplicationActionMethod forActionName="create"/>
             <testApplicationActionMethod forActionName="edit"/>
-          </testApplicationControllerFile>
-          <testApplicationControllerFile forControllerName="App">
-            <testApplicationActionMethod forActionName="index"/>
-            <testApplicationActionMethod forActionName="test"/>
           </testApplicationControllerFile>
         </testApplicationControllerDirectory>
       </testApplicationDirectory>

@@ -27,9 +27,9 @@ class PatientController extends Zend_Controller_Action {
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
-                $patient = new Application_Model_Patient($form->getValues());
+                $patient = new Application_Model_Patient_Patient($form->getValues());
                 $patient->setUserID_fk(Zend_Auth::getInstance()->getStorage()->read()->userID);
-                $mapper = new Application_Model_PatientMapper();
+                $mapper = new Application_Model_Patient_PatientMapper();
                 $mapper->save($patient);
                 return $this->_helper->redirector('index');
             }
@@ -51,14 +51,14 @@ class PatientController extends Zend_Controller_Action {
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
-                $patient = new Application_Model_Patient($form->getValues());
-                $mapper = new Application_Model_PatientMapper();
+                $patient = new Application_Model_Patient_Patient($form->getValues());
+                $mapper = new Application_Model_Patient_PatientMapper();
                 $mapper->save($patient);
                 return $this->_helper->redirector('list');
             }
         } else {
-            $patient = new Application_Model_Patient();
-            $mapper = new Application_Model_PatientMapper();
+            $patient = new Application_Model_Patient_Patient();
+            $mapper = new Application_Model_Patient_PatientMapper();
             $mapper->find($patientID, $patient);
 
 
@@ -69,7 +69,7 @@ class PatientController extends Zend_Controller_Action {
     }
 
     public function getpatientsAction() {
-        $patienten = new Application_Model_PatientMapper();
+        $patienten = new Application_Model_Patient_PatientMapper();
         $daten = $patienten->fetchAll();
 
         $json = array();
@@ -94,7 +94,7 @@ class PatientController extends Zend_Controller_Action {
                 ->addStylesheet('/css/jquery.dataTables.css');
         // Bisher zugeordnete Sprueche holen
         $patientID = $this->getParam('id');
-        $patientMapper = new Application_Model_PatientMapper();
+        $patientMapper = new Application_Model_Patient_PatientMapper();
         $maximsFromPatient = $patientMapper->getMaximsFromPatient($patientID);
 
         // Alle Spruche fuer Anzeige holen
@@ -135,7 +135,7 @@ class PatientController extends Zend_Controller_Action {
                 ->addStylesheet('/css/jquery.dataTables.css');
         // Bisher zugeordnete Sprueche holen
         $patientID = $this->getParam('id');
-        $patientMapper = new Application_Model_PatientMapper();
+        $patientMapper = new Application_Model_Patient_PatientMapper();
         $distractionsFromPatient = $patientMapper->getDistractionsFromPatient($patientID);
 
         // Alle Spruche fuer Anzeige holen

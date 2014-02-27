@@ -7,7 +7,7 @@ class Custom_Auth_AclList extends Zend_Acl {
 
         // Controller script names. You have to add all of them if credential check
         // is global to your application.
-        $controllers = array('auth', 'error', 'index', 'patient', 'contact-point','maxim','distraction','emergency-case');
+        $controllers = array('app','auth', 'error', 'index', 'patient', 'contact-point','maxim','distraction','emergency-case');
 
         foreach ($controllers as $controller) {
             $this->add(new Zend_Acl_Resource($controller));
@@ -21,7 +21,7 @@ class Custom_Auth_AclList extends Zend_Acl {
 
         // allow(benutzer, controller, action methoden)
         // add privileges to roles and resource combinations
-        $this->allow('guest', 'error');
+        $this->allow('guest', array('error','app'));
         $this->allow('guest', 'auth');
         // Kein Zugriff auf Logout
         $this->deny('guest', 'auth', 'logout');

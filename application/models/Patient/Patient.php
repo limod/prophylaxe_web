@@ -1,6 +1,6 @@
 <?php
 
-class Application_Model_Patient {
+class Application_Model_Patient_Patient {
 
     protected $_id;
     protected $_first_name;
@@ -9,6 +9,7 @@ class Application_Model_Patient {
     protected $_birth_date;
     protected $_email;
     protected $_userID_fk;
+    protected $_token;
 
     public function __construct(array $options = null) {
         if (is_array($options)) {
@@ -109,7 +110,17 @@ class Application_Model_Patient {
     public function getUserID_fk() {
         return $this->_userID_fk;
     }
+    
+    
+    public function getToken() {
+        return $this->_token;
+    }
 
+    public function setToken($_token) {
+        $this->_token = $_token;
+    }
+
+    
     /*
      * Liefert die Daten des Objekts als Array zurueck fuer jDataTable
      */
