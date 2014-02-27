@@ -1,7 +1,6 @@
 <?php
 
-class Application_Model_EmergencyCase_EcHelpPerson
-{
+class Application_Model_EmergencyCase_EcHelpPerson {
 
     protected $_ehpID;
     protected $_name;
@@ -71,7 +70,7 @@ class Application_Model_EmergencyCase_EcHelpPerson
         $this->_ecID_fk = $_ecID_fk;
         return $this;
     }
-    
+
     public function getPhone_number() {
         return $this->_phone_number;
     }
@@ -80,9 +79,8 @@ class Application_Model_EmergencyCase_EcHelpPerson
         $this->_phone_number = $_phone_number;
     }
 
-    
-//    public function getArray() {
-//        return array($this->getEhpID(), $this->getName(), $this->getEcID_fk());
-//    }
+    public function getKeyValueArray() {
+        return array('name' => $this->getName(), 'phone_number' => $this->getPhone_number());
+    }
 
 }

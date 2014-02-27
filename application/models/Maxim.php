@@ -59,10 +59,13 @@ class Application_Model_Maxim {
     public function getId() {
         return $this->_maximID;
     }
-    
-     public function getArray() {
+
+    public function getArray() {
         return array($this->getId(), $this->getText());
     }
 
-}
+    public function getKeyValueArray() {
+        return array('maximID' => $this->getId(), 'text' => $this->getText());
+    }
 
+}

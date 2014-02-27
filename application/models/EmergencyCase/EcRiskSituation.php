@@ -73,5 +73,9 @@ class Application_Model_EmergencyCase_EcRiskSituation {
     public function getArray() {
         return array($this->getErsID(), $this->getText(), $this->getEcID_fk());
     }
+    
+    public function getKeyValueArray() {
+        return array('ersID'=>$this->getErsID(),'text'=> $this->getText());
+    }
 
 }

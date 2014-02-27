@@ -418,8 +418,8 @@ class Application_Form_EmergencyCase extends Zend_Form {
 //                $tmp_array[] = $value->getText();
 //            }
 //        }
-
         $tmp = $this->setDefaultsHelper($this->_riskSituationArrayName, $defaults);
+//        $tmp = $defaults[$this->_riskSituationArrayName];
         if (count($tmp) > 0) {
             $this->addRiskSituation($tmp);
         } else {
@@ -427,12 +427,14 @@ class Application_Form_EmergencyCase extends Zend_Form {
         }
 
         $tmp = $this->setDefaultsHelper($this->_limitRelapseArrayName, $defaults);
+//        $tmp = $defaults[$this->_limitRelapseArrayName];
         if (count($tmp) > 0) {
             $this->addLimitRelapses($tmp);
         } else {
             $this->addLimitRelapses();
         }
         $tmp = $this->setDefaultsHelper($this->_safetyActionArrayName, $defaults);
+//        $tmp = $defaults[$this->_safetyActionArrayName];
         if (count($tmp) > 0) {
             $this->addSafetyAction($tmp);
         } else {
@@ -440,6 +442,7 @@ class Application_Form_EmergencyCase extends Zend_Form {
         }
 
         $tmp = $this->setDefaultsHelper($this->_safetyThoughtArrayName, $defaults);
+//        $tmp = $defaults[$this->_safetyThoughtArrayName];
         if (count($tmp) > 0) {
             $this->addSafetyThought($tmp);
         } else {
@@ -447,10 +450,11 @@ class Application_Form_EmergencyCase extends Zend_Form {
         }
 
 
+        $tmp = $defaults[$this->_helpPersonArrayName];
         if (isset($defaults[$this->_helpPersonArrayName])) {
             $tmp_array = array();
             foreach ($defaults[$this->_helpPersonArrayName] as $value) {
-                $tmp_array[] = array('name' => $value->getName(), 'phonenumber' => $value->getPhone_number());
+                $tmp_array[] = array('name' => $value['name'], 'phonenumber' => $value['phone_number']);
             }
         }
         if (count($tmp_array) > 0) {
@@ -466,7 +470,7 @@ class Application_Form_EmergencyCase extends Zend_Form {
         if (isset($defaults[$arrayName])) {
             $tmp_array = array();
             foreach ($defaults[$arrayName] as $value) {
-                $tmp_array[] = $value->getText();
+                $tmp_array[] = $value['text'];
             }
         }
         return $tmp_array;

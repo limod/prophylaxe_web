@@ -74,4 +74,8 @@ class Application_Model_EmergencyCase_EcLimitRelapse {
         return array($this->getElrID(), $this->getText(), $this->getEcID_fk());
     }
 
+    public function getKeyValueArray() {
+        return array('elrID' => $this->getElrID(), 'text' => $this->getText(), 'ecID_fk' => $this->getEcID_fk());
+    }
+
 }

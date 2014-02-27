@@ -67,7 +67,9 @@ class Application_Model_Patient_PatientMapper {
         $select->where('email = ?', $email);
 
         $row = $this->getDbTable()->fetchAll($select);
-        $row = $patient->current();
+      
+        
+        $row = $row->current();
 
         $patient->setId($row->patientID)
                 ->setFirstname($row->first_name)
@@ -77,6 +79,10 @@ class Application_Model_Patient_PatientMapper {
                 ->setEmail($row->email)
                 ->setUserID_fk($row->userID_fk)
                 ->setToken($row->token);
+        
+ 
+          
+          
     }
 
     public function fetchAll() {

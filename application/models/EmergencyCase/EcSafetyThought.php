@@ -74,4 +74,8 @@ class Application_Model_EmergencyCase_EcSafetyThought {
         return array($this->getEstID(), $this->getText(), $this->getEcID_fk());
     }
 
+    public function getKeyValueArray() {
+        return array('estID' => $this->getEstID(), 'text' => $this->getText());
+    }
+
 }

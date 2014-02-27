@@ -266,7 +266,7 @@ class Application_Model_EmergencyCase_EmergencyCase {
     }
 
     public function getKeyValueArray() {
-        return array(
+        $tmp = array(
             'ecID' => $this->getEcID(),
             'patientID_fk' => $this->getPatientID_fk(),
             'addict_drughotline' => $this->getAddict_drughotline(),
@@ -278,12 +278,30 @@ class Application_Model_EmergencyCase_EmergencyCase {
             'temptation_thought' => $this->getTemptation_thought(),
             'temptation_thought_abstinence' => $this->getTemptation_thought_abstinence(),
             'temptation_behaviour' => $this->getTemptation_behaviour(),
-            'risk_situations_array' => $this->getRisk_situations_array(),
-            'help_persons_array' => $this->getHelp_persons_array(),
-            'limit_relapses_array' => $this->getLimit_relapses_array(),
-            'safety_thoughts_array' => $this->getSafety_thoughts_array(),
-            'safety_actions_array' => $this->getSafety_actions_array()
         );
+        foreach ($this->getRisk_situations_array() as $value) {
+            $tmp['risk_situations_array'][] = $value->getKeyValueArray();
+        }
+        foreach ($this->getLimit_relapses_array() as $value) {
+            $tmp['limit_relapses_array'][] = $value->getKeyValueArray();
+        }
+        foreach ($this->getSafety_thoughts_array() as $value) {
+            $tmp['safety_thoughts_array'][] = $value->getKeyValueArray();
+        }
+        foreach ($this->getSafety_actions_array() as $value) {
+            $tmp['safety_actions_array'][] = $value->getKeyValueArray();
+        }
+        foreach ($this->getHelp_persons_array() as $value) {
+            $tmp['help_persons_array'][] = $value->getKeyValueArray();
+        }
+
+//            $tmp['help_persons_array'] => $this->getHelp_persons_array(),
+//            $tmp['limit_relapses_array'] => $this->getLimit_relapses_array(),
+//            $tmp['safety_thoughts_array'] => $this->getSafety_thoughts_array(),
+//            $tmp['safety_actions_array'] => $this->getSafety_actions_array()
+
+
+        return $tmp;
     }
 
 }
