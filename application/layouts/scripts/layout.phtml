@@ -5,21 +5,19 @@
         <title>Zend Framework Schnellstart Anwendung</title>
 
         <?php echo $this->headLink()->appendStylesheet('/css/bootstrap.min.css') ?>
-        <?php echo $this->headLink()->appendStylesheet('/css/global.css') ?>
+     
+            <?php echo $this->headLink()->appendStylesheet('/css/global.css') ?>
 
-        <?php echo $this->jQuery(); ?>
-        <?php
-        $this->headScript()->appendFile('/js/bootstrap/bootstrap.min.js')   
-                ->appendFile('/js/jquery/js/jquery-ui-1.10.3.custom.min.js');
-        
-        
-        
-        $this->headScript()->appendFile('/js/Menu.js');
-//                ->prependFile('/js/jquery/jquery.dataTables.min.js')
-//                ->prependFile('/js/jquery/jquery-1.10.2.min.js');
+            <?php echo $this->jQuery(); ?>
+
+            <?php
+            $this->headScript()->appendFile('/js/bootstrap/bootstrap.min.js');
+            $this->headScript()->appendFile('/js/jquery/js/jquery-ui-1.10.4.custom.min.js');
+            $this->headScript()->appendFile('/js/Menu.js');
 //
-        echo $this->headScript();
-        ?>
+            echo $this->headScript();            
+            ?>
+      
 
     </head>
     <body>

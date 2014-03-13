@@ -32,11 +32,13 @@ class Application_Model_Patient_PatientMapper {
             'birth_date' => $patient->getBirthdate(),
             'email' => $patient->getEmail(),
             'userID_fk' => $patient->getUserID_fk(),
-            'token' => $random_hash
+            'token' => $patient->getToken(),
+            'token_used' => $patient->getToken_used()
         );
 
         if (null === ($id = $patient->getId())) {
             unset($data['id']);
+            $data['token'] = $random_hash;
             $this->getDbTable()->insert($data);
         } else {
             $this->getDbTable()->update($data, array('patientID = ?' => $id));
@@ -51,15 +53,18 @@ class Application_Model_Patient_PatientMapper {
         if (0 == count($result)) {
             return;
         }
-        $row = $result->current();
-        $patient->setId($row->patientID)
-                ->setFirstname($row->first_name)
-                ->setLastname($row->last_name)
-                ->setUsername($row->user_name)
-                ->setBirthdate($row->birth_date)
-                ->setEmail($row->email)
-                ->setUserID_fk($row->userID_fk)
-                ->setToken($row->token);
+        $patientRow = $result->current();
+        $patient->setId($patientRow->patientID)
+                ->setFirstname($patientRow->first_name)
+                ->setLastname($patientRow->last_name)
+                ->setUsername($patientRow->user_name)
+                ->setBirthdate($patientRow->birth_date)
+                ->setEmail($patientRow->email)
+                ->setUserID_fk($patientRow->userID_fk)
+                ->setToken($patientRow->token)
+                ->setToken_used($patientRow->token_used);
+
+        $this->statusCheck($patientRow, $patient);
     }
 
     public function findByEmail($email, Application_Model_Patient_Patient $patient = null) {
@@ -67,8 +72,12 @@ class Application_Model_Patient_PatientMapper {
         $select->where('email = ?', $email);
 
         $row = $this->getDbTable()->fetchAll($select);
-      
-        
+
+        // Wenn kein Datensatz gefunden wurde abbrechen
+        if (!($row->count() > 0)) {
+            return false;
+        }
+
         $row = $row->current();
 
         $patient->setId($row->patientID)
@@ -78,11 +87,32 @@ class Application_Model_Patient_PatientMapper {
                 ->setBirthdate($row->birth_date)
                 ->setEmail($row->email)
                 ->setUserID_fk($row->userID_fk)
-                ->setToken($row->token);
-        
- 
-          
-          
+                ->setToken($row->token)
+                ->setToken_used($row->token_used);
+
+        $this->statusCheck($row, $patient);
+
+        return true;
+    }
+
+    /*
+     * Prueft ob fuer einen Patient bereits ein EmergencyCase, Maxims oder Distractions zugeordnet wurden
+     */
+
+    private function statusCheck(Zend_Db_Table_Row $patientRow, Application_Model_Patient_Patient $patient) {
+//          $patientRow = $this->find($patientID);
+        $result = $patientRow->findDependentRowset('Application_Model_DbTable_EmergencyCase');
+        if ($result->count() > 0)
+            $patient->setHasEmergencyCase(true);
+
+        $result = $patientRow->findDependentRowset('Application_Model_DbTable_MaximHasPatient');
+        if ($result->count() > 0)
+            $patient->setHasMaxim(true);
+
+        $result = $patientRow->findDependentRowset('Application_Model_DbTable_DistractionHasPatient');
+        if ($result->count() > 0)
+            $patient->setHasDistraction(true);
+//        $result = $patientRow->findManyToManyRowset('Application_Model_DbTable_Maxim', 'Application_Model_DbTable_MaximHasPatient');
     }
 
     public function fetchAll() {
@@ -109,17 +139,19 @@ class Application_Model_Patient_PatientMapper {
 //      $resultSet = $this->getDbTable()->fetchAll($where);
 
         $entries = array();
-        foreach ($patients as $row) {
+        foreach ($patients as $patientRow) {
             $entry = new Application_Model_Patient_Patient();
-            $entry->setId($row->patientID)
-                    ->setFirstname($row->first_name)
-                    ->setLastname($row->last_name)
-                    ->setUsername($row->user_name)
-                    ->setBirthdate($row->birth_date)
-                    ->setEmail($row->email)
-                    ->setUserID_fk($row->userID_fk)
-                    ->setToken($row->token);
+            $entry->setId($patientRow->patientID)
+                    ->setFirstname($patientRow->first_name)
+                    ->setLastname($patientRow->last_name)
+                    ->setUsername($patientRow->user_name)
+                    ->setBirthdate($patientRow->birth_date)
+                    ->setEmail($patientRow->email)
+                    ->setUserID_fk($patientRow->userID_fk)
+                    ->setToken($patientRow->token)
+                    ->setToken_used($patientRow->token_used);
 
+            $this->statusCheck($patientRow, $entry);
             $entries[] = $entry;
         }
         return $entries;

@@ -87,10 +87,13 @@ class Application_Model_EmergencyCase_EmergencyCaseMapper {
         // Zugehoerigen Notfallkoffer holen
         $rowEC = $patientRow->findDependentRowset('Application_Model_DbTable_EmergencyCase');
 
+        if(!($rowEC->count() > 0))
+            return null;
         // Zugehoerige Rueckfaelle holen
         $limitRelapses = $rowEC->current()->findDependentRowset('Application_Model_DbTable_EcLimitRelapse');
         $limitRelapsesArray = array();
 
+        
         foreach ($limitRelapses as $row) {
             $lr = new Application_Model_EmergencyCase_EcLimitRelapse();
             $lr->setEcID_fk($row->ecID_fk)

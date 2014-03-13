@@ -55,6 +55,8 @@
         <controllerFile controllerName="App">
           <actionMethod actionName="index"/>
           <actionMethod actionName="test"/>
+          <actionMethod actionName="getContactpoints"/>
+          <actionMethod actionName="getContactpointTimestamp"/>
         </controllerFile>
       </controllersDirectory>
       <formsDirectory>
@@ -218,6 +220,12 @@
           <viewControllerScriptsDirectory forControllerName="App">
             <viewScriptFile forActionName="test"/>
           </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="App">
+            <viewScriptFile forActionName="getContactpoints"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="App">
+            <viewScriptFile forActionName="getContactpointTimestamp"/>
+          </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
         <viewFiltersDirectory enabled="false"/>
@@ -298,6 +306,8 @@
           <testApplicationControllerFile forControllerName="App">
             <testApplicationActionMethod forActionName="index"/>
             <testApplicationActionMethod forActionName="test"/>
+            <testApplicationActionMethod forActionName="getContactpoints"/>
+            <testApplicationActionMethod forActionName="getContactpointTimestamp"/>
           </testApplicationControllerFile>
         </testApplicationControllerDirectory>
       </testApplicationDirectory>

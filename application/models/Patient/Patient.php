@@ -10,6 +10,11 @@ class Application_Model_Patient_Patient {
     protected $_email;
     protected $_userID_fk;
     protected $_token;
+    protected $_token_used;
+    protected $_status;
+    protected $_hasEmergencyCase = false;
+    protected $_hasDistraction = false;
+    protected $_hasMaxim = false;
 
     public function __construct(array $options = null) {
         if (is_array($options)) {
@@ -110,23 +115,81 @@ class Application_Model_Patient_Patient {
     public function getUserID_fk() {
         return $this->_userID_fk;
     }
-    
-    
+
     public function getToken() {
         return $this->_token;
     }
 
     public function setToken($_token) {
         $this->_token = $_token;
+        return $this;
     }
 
+    public function getToken_used() {
+        return $this->_token_used;
+    }
+
+    public function setToken_used($_token_used) {
+        $this->_token_used = $_token_used;
+        return $this;
+    }
+
+    public function getStatus() {
+        $info = array();
+        if(!$this->hasEmergencyCase())
+            $info[] = 'Notfallkoffer nicht vorhanden.';
+        if(!$this->hasDistraction())
+            $info[] = 'Ablenkung nicht vorhanden.';
+        if(!$this->hasMaxim())
+            $info[] = 'Spruch nicht vorhanden.';
+        return $info;
+    }
     
+    /*
+     * Return TRUE wenn dem Patienten alle Daten zugeordnet wurden
+     */
+    public function hasValidData(){
+        return ($this->hasEmergencyCase() && $this->hasDistraction() && $this->hasMaxim()); 
+    }
+
+//    public function setStatus($_status) {
+//        $this->_status = $_status;
+//        return $this;
+//    }
+
+    public function hasEmergencyCase() {
+        return $this->_hasEmergencyCase;
+    }
+
+    public function setHasEmergencyCase($_hasEmergencyCase) {
+        $this->_hasEmergencyCase = $_hasEmergencyCase;
+        return $this;
+    }
+
+    public function hasDistraction() {
+        return $this->_hasDistraction;
+    }
+
+    public function setHasDistraction($_hasDistraction) {
+        $this->_hasDistraction = $_hasDistraction;
+        return $this;
+    }
+
+    public function hasMaxim() {
+        return $this->_hasMaxim;
+    }
+
+    public function setHasMaxim($_hasMaxim) {
+        $this->_hasMaxim = $_hasMaxim;
+        return $this;
+    }
+
     /*
      * Liefert die Daten des Objekts als Array zurueck fuer jDataTable
      */
 
     public function getPatientTableArray() {
-        return array($this->getId(), $this->getFirstname(), $this->getLastname(), $this->getBirthdate(), $this->getEmail(), $this->getUsername());
+        return array($this->getId(), $this->getFirstname(), $this->getLastname(), $this->getBirthdate(), $this->getEmail(), $this->getUsername(),$this->getStatus());
     }
 
     /*
