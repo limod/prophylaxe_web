@@ -10,6 +10,7 @@
         <controllerFile controllerName="Index">
           <actionMethod actionName="index"/>
           <actionMethod actionName="getPatient"/>
+          <actionMethod actionName="runThrough"/>
         </controllerFile>
         <controllerFile controllerName="Error"/>
         <controllerFile controllerName="Patient">
@@ -22,6 +23,7 @@
           <actionMethod actionName="saveMaxim"/>
           <actionMethod actionName="editDistraction"/>
           <actionMethod actionName="saveDistraction"/>
+          <actionMethod actionName="runThrough"/>
         </controllerFile>
         <controllerFile controllerName="Auth">
           <actionMethod actionName="index"/>
@@ -51,12 +53,19 @@
           <actionMethod actionName="index"/>
           <actionMethod actionName="create"/>
           <actionMethod actionName="edit"/>
+          <actionMethod actionName="runThrough"/>
         </controllerFile>
         <controllerFile controllerName="App">
           <actionMethod actionName="index"/>
           <actionMethod actionName="test"/>
           <actionMethod actionName="getContactpoints"/>
           <actionMethod actionName="getContactpointTimestamp"/>
+        </controllerFile>
+        <controllerFile controllerName="PatientRunThrough">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="emergencyCase"/>
+          <actionMethod actionName="maxim"/>
+          <actionMethod actionName="runThrough"/>
         </controllerFile>
       </controllersDirectory>
       <formsDirectory>
@@ -226,6 +235,27 @@
           <viewControllerScriptsDirectory forControllerName="App">
             <viewScriptFile forActionName="getContactpointTimestamp"/>
           </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="PatientRunThrough">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="PatientRunThrough">
+            <viewScriptFile forActionName="emergencyCase"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="PatientRunThrough">
+            <viewScriptFile forActionName="maxim"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Index">
+            <viewScriptFile forActionName="runThrough"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="PatientRunThrough">
+            <viewScriptFile forActionName="runThrough"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="EmergencyCase">
+            <viewScriptFile forActionName="runThrough"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Patient">
+            <viewScriptFile forActionName="runThrough"/>
+          </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
         <viewFiltersDirectory enabled="false"/>
@@ -263,6 +293,7 @@
           <testApplicationControllerFile forControllerName="Index">
             <testApplicationActionMethod forActionName="index"/>
             <testApplicationActionMethod forActionName="getPatient"/>
+            <testApplicationActionMethod forActionName="runThrough"/>
           </testApplicationControllerFile>
           <testApplicationControllerFile forControllerName="Patient">
             <testApplicationActionMethod forActionName="index"/>
@@ -273,6 +304,7 @@
             <testApplicationActionMethod forActionName="editMaxim"/>
             <testApplicationActionMethod forActionName="editDistraction"/>
             <testApplicationActionMethod forActionName="saveDistraction"/>
+            <testApplicationActionMethod forActionName="runThrough"/>
           </testApplicationControllerFile>
           <testApplicationControllerFile forControllerName="Auth">
             <testApplicationActionMethod forActionName="index"/>
@@ -302,12 +334,19 @@
             <testApplicationActionMethod forActionName="index"/>
             <testApplicationActionMethod forActionName="create"/>
             <testApplicationActionMethod forActionName="edit"/>
+            <testApplicationActionMethod forActionName="runThrough"/>
           </testApplicationControllerFile>
           <testApplicationControllerFile forControllerName="App">
             <testApplicationActionMethod forActionName="index"/>
             <testApplicationActionMethod forActionName="test"/>
             <testApplicationActionMethod forActionName="getContactpoints"/>
             <testApplicationActionMethod forActionName="getContactpointTimestamp"/>
+          </testApplicationControllerFile>
+          <testApplicationControllerFile forControllerName="PatientRunThrough">
+            <testApplicationActionMethod forActionName="index"/>
+            <testApplicationActionMethod forActionName="emergencyCase"/>
+            <testApplicationActionMethod forActionName="maxim"/>
+            <testApplicationActionMethod forActionName="runThrough"/>
           </testApplicationControllerFile>
         </testApplicationControllerDirectory>
       </testApplicationDirectory>

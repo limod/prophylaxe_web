@@ -189,7 +189,7 @@ class Application_Model_Patient_Patient {
      */
 
     public function getPatientTableArray() {
-        return array($this->getId(), $this->getFirstname(), $this->getLastname(), $this->getBirthdate(), $this->getEmail(), $this->getUsername(),$this->getStatus());
+        return array($this->getId(), $this->getFirstname(), $this->getLastname(), $this->getBirthdate(), $this->getEmail(), $this->getUsername(),$this->getStatus(),$this->getToken_used());
     }
 
     /*

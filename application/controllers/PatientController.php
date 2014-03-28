@@ -2,6 +2,8 @@
 
 class PatientController extends Zend_Controller_Action {
 
+    private $runthrough = null;
+
     public function init() {
         $contextSwitch = $this->_helper->getHelper('contextSwitch');
         $contextSwitch->addActionContext('getpatients', 'json')
@@ -15,8 +17,6 @@ class PatientController extends Zend_Controller_Action {
     public function indexAction() {
 //        $patient = new Application_Model_PatientMapper();
 //        $this->view->entries = $patient->fetchAll();
-
-      
     }
 
     public function createAction() {
@@ -31,7 +31,10 @@ class PatientController extends Zend_Controller_Action {
                 $patient->setUserID_fk(Zend_Auth::getInstance()->getStorage()->read()->userID);
                 $mapper = new Application_Model_Patient_PatientMapper();
                 $mapper->save($patient);
-                return $this->_helper->redirector('index');
+
+                $this->sendConfirmEmail($patient);
+
+                $this->_helper->redirector->gotoUrl('/patient/run-through/' . $patient->getId());
             }
         }
 
@@ -94,6 +97,8 @@ class PatientController extends Zend_Controller_Action {
                 ->addStylesheet('/css/jquery.dataTables.css');
         // Bisher zugeordnete Sprueche holen
         $patientID = $this->getParam('id');
+        $this->runthrough = $this->getParam('runthrough');
+
         $patientMapper = new Application_Model_Patient_PatientMapper();
         $maximsFromPatient = $patientMapper->getMaximsFromPatient($patientID);
 
@@ -135,10 +140,12 @@ class PatientController extends Zend_Controller_Action {
                 ->addStylesheet('/css/jquery.dataTables.css');
         // Bisher zugeordnete Sprueche holen
         $patientID = $this->getParam('id');
+//        $this->runthrough = $this->getParam('runthrough');
+//        $this->runthrough = 'FOO';
         $patientMapper = new Application_Model_Patient_PatientMapper();
         $distractionsFromPatient = $patientMapper->getDistractionsFromPatient($patientID);
 
-        // Alle Spruche fuer Anzeige holen
+        // Alle Sprueche fuer Anzeige holen
         $mapper = new Application_Model_DistractionMapper();
         $distractions = $mapper->fetchAll();
 
@@ -146,6 +153,9 @@ class PatientController extends Zend_Controller_Action {
 //        Zend_Registry::set('patientID',$patientID);
         $ns = new Zend_Session_Namespace('edit-distraction');
         $ns->patient_id = $patientID;
+        $ns->runthrough = $this->getParam('runthrough');
+
+
 
         $this->view->distractionsFromPatient = $distractionsFromPatient;
         $this->view->distractions = $distractions;
@@ -156,13 +166,60 @@ class PatientController extends Zend_Controller_Action {
         // Gespeicherte Patient ID holen
         $ns = new Zend_Session_Namespace('edit-distraction');
         $patientID = $ns->patient_id;
+        $runthrough = $ns->runthrough;
 
         $distractionHasPatientMapper = new Application_Model_DistractionHasPatientMapper();
         $distractionHasPatientMapper->saveAll($patientID, $request);
 
 
-        $this->view->redirect = "/patient/list";
+        if ($runthrough) {
+            $this->view->redirect = '/patient/edit-maxim/' . $patientID . '/1';
+        } else {
+            $this->view->redirect = "/patient/list";
+        }
+
+        Zend_Session::namespaceUnset('edit-distraction');
+    }
+
+    public function runThroughAction() {
+        $patientID = $this->getParam('id');
+        $this->view->emergencyLink = '/emergency-case/create/' . $patientID;
+        $this->view->startseite = '/index';
+    }
+
+    private function sendConfirmEmail(Application_Model_Patient_Patient $patient) {
+        $config = Zend_Controller_Front::getInstance()->getParam('bootstrap');
+        $mailsettings = $config->getOption('mailsettings');
+
+        $html = new Zend_View();
+        $html->setScriptPath($mailsettings['templatePath']);
+
+
+
+        // assign valeues
+        $html->assign('name', $patient->getFirstname());
+        $html->assign('token', $patient->getToken());
+
+        // create mail object
+        $mail = new Zend_Mail('utf-8');
+
+
+
+        $mailServerUrl = $mailsettings['mailserver'];
+
+        $from = $mailsettings['fromEmail'];
+
+        $transport = new Zend_Mail_Transport_Smtp($mailServerUrl);
+
+        // render view
+        $bodyText = $html->render('confirmEmail.phtml');
+
+        $mail = new Zend_Mail();
+        $mail->setBodyHtml($bodyText);
+        $mail->setFrom($from);
+        $mail->addTo($patient->getEmail());
+        $mail->setSubject('Suchtprophylaxe Bestätigung');
+        $mail->send($transport);
     }
 
 }
-

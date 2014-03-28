@@ -82,7 +82,7 @@ class Application_Model_ContactPointMapper {
                     ->setName($row->name)
                     ->setStreet($row->street)
                     ->setPlz($row->plz)
-                    ->setTown($row->town)
+                    ->setTown(($row->town))
                     ->setPhone_number($row->phone_number)
                     ->setEmail($row->email);
             $entries[] = $entry;

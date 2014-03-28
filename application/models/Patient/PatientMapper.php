@@ -22,7 +22,7 @@ class Application_Model_Patient_PatientMapper {
         return $this->_dbTable;
     }
 
-    public function save(Application_Model_Patient_Patient $patient) {
+    public function save(Application_Model_Patient_Patient &$patient) {
         // Security Token erzeugen
         $random_hash = substr(md5(uniqid(rand(), true)), 0, 10);
         $data = array(
@@ -39,7 +39,11 @@ class Application_Model_Patient_PatientMapper {
         if (null === ($id = $patient->getId())) {
             unset($data['id']);
             $data['token'] = $random_hash;
-            $this->getDbTable()->insert($data);
+            $patient->setToken($data['token']);
+            
+            $id  =$this->getDbTable()->insert($data);            
+            $patient->setId($id);
+            
         } else {
             $this->getDbTable()->update($data, array('patientID = ?' => $id));
         }

@@ -31,7 +31,7 @@ class Custom_Form_Decorator_HelpPerson extends Zend_Form_Decorator_Abstract {
 
         $markup = $view->formLabel($name . '[name]', 'Name'). $view->formText($name . '[name]', $namePerson, $params)
                 . ' / '  . $view->formLabel($name . '[phonenumber]', 'Nummer') .  $view->formText($name . '[phonenumber]', $phoneNumber, $params)
-                . '<button name="btnRemove" type="button" class="btn btn-warning"><span class="glyphicon glyphicon-minus"></span></button>';
+                . '<button name="btnRemove" class="emergency_case_delete_button">L&ouml;schen</button>';
 
         switch ($this->getPlacement()) {
             case self::PREPEND:

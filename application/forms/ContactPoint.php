@@ -17,7 +17,7 @@ class Application_Form_ContactPoint extends Zend_Form {
             'label' => 'Name:',
             'required' => true,
             'filters' => array('StringTrim'),
-            'class' => array('form-control'),
+            'class' => array(''),
             'validators' => array(
                 array('validator' => 'StringLength', 'options' => array(3, 45))
             )
@@ -27,7 +27,7 @@ class Application_Form_ContactPoint extends Zend_Form {
         $this->addElement('text', 'street', array(
             'label' => 'Strasse:',
             'required' => true,
-            'class' => array('form-control'),
+            'class' => array(''),
             'validators' => array(
                 array('validator' => 'StringLength', 'options' => array(0, 20))
             )
@@ -37,7 +37,7 @@ class Application_Form_ContactPoint extends Zend_Form {
         $this->addElement('text', 'plz', array(
             'label' => 'PLZ:',
             'required' => true,
-            'class' => array('form-control'),
+            'class' => array(''),
             'validators' => array(
                 array('validator' => 'StringLength', 'options' => array(5, 20))
             )
@@ -47,7 +47,7 @@ class Application_Form_ContactPoint extends Zend_Form {
         $this->addElement('text', 'town', array(
             'label' => 'Stadt:',
             'required' => true,
-            'class' => array('form-control'),
+            'class' => array(''),
             'validators' => array(
                 array('validator' => 'StringLength', 'options' => array(3, 20))
             )
@@ -57,7 +57,7 @@ class Application_Form_ContactPoint extends Zend_Form {
         $this->addElement('text', 'phone_number', array(
             'label' => 'Telefonnummer:',
             'required' => true,
-            'class' => array('form-control'),
+            'class' => array(''),
             'validators' => array(
                 array('validator' => 'StringLength', 'options' => array(3, 20))
             )
@@ -67,7 +67,7 @@ class Application_Form_ContactPoint extends Zend_Form {
         $this->addElement('text', 'email', array(
             'label' => 'Email:',
             'required' => false,
-            'class' => array('form-control'),
+            'class' => array(''),
             'validators' => array(
                 'EmailAddress'
             )

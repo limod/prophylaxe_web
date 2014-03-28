@@ -826,28 +826,28 @@ pre code {
   }
 }
 
-.row {
+.formRow {
   margin-right: -15px;
   margin-left: -15px;
 }
 
-.row:before,
-.row:after {
+.formRow:before,
+.formRow:after {
   display: table;
   content: " ";
 }
 
-.row:after {
+.formRow:after {
   clear: both;
 }
 
-.row:before,
-.row:after {
+.formRow:before,
+.formRow:after {
   display: table;
   content: " ";
 }
 
-.row:after {
+.formRow:after {
   clear: both;
 }
 

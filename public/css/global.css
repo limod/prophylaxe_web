@@ -165,6 +165,18 @@ edit-maxim Start
 edit-maxim Ende
 */
 
+/*
+Patienten auflisten Start
+url: patient/list
+*/
+#patient_edit_table .btnStatus {
+    width:145px;
+    
+}
+
+/*
+Patienten auflisten Ende
+*/
 
 /*
 Patient Anlegen Formular Start

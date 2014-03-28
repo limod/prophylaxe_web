@@ -1,19 +1,27 @@
 <?php
 
-class EmergencyCaseController extends Zend_Controller_Action {
+class EmergencyCaseController extends Zend_Controller_Action
+{
 
-    public function init() {
+    public function init()
+    {
         /* Initialize action controller here */
     }
 
-    public function indexAction() {
+    public function indexAction()
+    {
         // action body
     }
 
-    public function createAction() {
+    public function createAction()
+    {
         $this->view->jQuery()->addJavascriptFile('/js/emergency-case/EmergencyCase.js');
 
-        $patientD = $this->getParam('id');
+        $patientID = $this->getParam('id');
+        $runthrough = $this->getParam('runthrough');
+//        $controller = $this->getParam('redirect_controller');
+//        $action = $this->getParam('redirect_action');
+//        $redirectUrl = '/' . $controller . '/' . $action . '/' . $patientID;
 
         $form = new Application_Form_EmergencyCase();
 
@@ -27,17 +35,25 @@ class EmergencyCaseController extends Zend_Controller_Action {
 
             if ($form->isValid($post)) {
                 $emergencyCase = new Application_Model_EmergencyCase_EmergencyCase($form->getValues());
-                $emergencyCase->setPatientID_fk($patientD);
+                $emergencyCase->setPatientID_fk($patientID);
 
                 $mapper = new Application_Model_EmergencyCase_EmergencyCaseMapper();
                 $emergencyCaseID = $mapper->save($emergencyCase);
-                return $this->_helper->redirector('index');
+
+                if ($runthrough) {
+                    $this->_helper->redirector->gotoUrl('/patient/edit-distraction/' . $patientID . '/1');
+                } else {
+                    $this->_helper->redirector('index');
+                }
+
+//                return $this->_helper->redirector('index');
             }
         }
         $this->view->form = $form;
     }
 
-    public function editAction() {
+    public function editAction()
+    {
         $this->view->jQuery()->addJavascriptFile('/js/emergency-case/EmergencyCase.js');
         $patientID = $this->getParam('id');
 
@@ -76,4 +92,12 @@ class EmergencyCaseController extends Zend_Controller_Action {
         $this->view->form = $form;
     }
 
+    public function runThroughAction()
+    {
+        // action body
+    }
+
+
 }
+
+
