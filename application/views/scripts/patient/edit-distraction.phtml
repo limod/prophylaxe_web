@@ -2,10 +2,12 @@
     <div class="row">
 
         <div class="col-md-12 ">
-            <p>Dem Patienten sind zurzeit folgende Ablenkungsmöglikeiten zugeordnet:</p>
-
+            <h2>Dem Patienten sind zurzeit folgende Ablenkungsmöglikeiten zugeordnet:</h2>
+            <p>
+                <button id="btnSubmit" type="button" class="btn btn-primary">Daten Übernehmen</button>
+            </p>
             <div>
-                <table border="1" id="patient_has_distractions">
+                <table id="patient_has_distractions">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -16,7 +18,7 @@
                     </thead>
 
                     <?php foreach ($this->distractionsFromPatient as $key => $val): ?>
-                        <tr distractionid="<?php echo $val->getId(); ?>">
+                        <tr>
                             <td>
                                 <?php
                                 echo $val->getId();
@@ -32,18 +34,16 @@
                                 echo $val->getEmotionText();
                                 ?>
                             </td>
-                            <td>
-                                <button name="btnRemove" type="button" class="btn btn-warning"><span class="glyphicon glyphicon-minus"></span></button>
+                            <td class="center_column">
+                                <button distractionid="<?php echo $val->getId(); ?>" name="btnRemove" type="button" class="btn btn-warning"><span class="glyphicon glyphicon-minus"></span></button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
             </div>
 
-            <p>
-                <br/>
-                <button id="btnSubmit" type="button" class="btn btn-primary">Daten Übernehmen</button>
-            </p>
+            <br/>
+            <br/>
 
             <table id="patient_distraction_table" border="">
                 <thead>
@@ -66,7 +66,7 @@
                             <td>
                                 <?php echo $val->getEmotionText(); ?>
                             </td>
-                            <td>
+                            <td class="center_column">
                             </td>
                         </tr>    
                     <?php endforeach; ?>

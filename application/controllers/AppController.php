@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Controller fuer die Schnittstellen
+ * Siehe Schnittstellen.pdf
+ */
 class AppController extends Zend_Controller_Action {
 
     private $OK = 1;
@@ -19,6 +23,10 @@ class AppController extends Zend_Controller_Action {
         // action body
     }
 
+    /*
+     * Liefert einen Patienten
+     * @params token,email
+     */
     public function getPatientAction() {
         // Post variablen holen
         $token = $this->getRequest()->getParam('token');
@@ -91,6 +99,9 @@ class AppController extends Zend_Controller_Action {
 //        $this->_helper->viewRenderer->setNoRender(true);
     }
 
+    /*
+     * Zum testen fuer die App
+     */
     public function testAction() {
         $_POST['token'] = '123';
         $_POST['email'] = 'o.mckinney@localhost.com';
@@ -98,6 +109,9 @@ class AppController extends Zend_Controller_Action {
         $this->getPatientAction();
     }
 
+    /*
+     * Liefert alle Anlaufstellen
+     */
     public function getContactpointsAction() {
         // action body
         $contactPointMapper = new Application_Model_ContactPointMapper();
@@ -111,6 +125,9 @@ class AppController extends Zend_Controller_Action {
         exit();
     }
 
+    /*
+     * Liefert Timestamp wann die zuletzt eine Anlaufstelle bearbeitet wurde
+     */
     public function getContactpointTimestampAction() {
         // action body
         $contactPointMapper = new Application_Model_ContactPointMapper();

@@ -1,8 +1,10 @@
 <?php
 
+/*
+ * Controller zum Verwalten von Patienten
+ * 
+ */
 class PatientController extends Zend_Controller_Action {
-
-    private $runthrough = null;
 
     public function init() {
         $contextSwitch = $this->_helper->getHelper('contextSwitch');
@@ -18,7 +20,9 @@ class PatientController extends Zend_Controller_Action {
 //        $patient = new Application_Model_PatientMapper();
 //        $this->view->entries = $patient->fetchAll();
     }
-
+    /*
+     * Anlegen eines Patienten
+     */
     public function createAction() {
 
 
@@ -41,6 +45,9 @@ class PatientController extends Zend_Controller_Action {
         $this->view->form = $form;
     }
 
+    /*
+     * Bearbeiten eines Patienten
+     */
     public function editAction() {
         $patientID = $this->getParam('id');
 
@@ -71,6 +78,9 @@ class PatientController extends Zend_Controller_Action {
         $this->view->form = $form;
     }
 
+    /*
+     * Liefert alle Patienten fuer jDataTable
+     */
     public function getpatientsAction() {
         $patienten = new Application_Model_Patient_PatientMapper();
         $daten = $patienten->fetchAll();
@@ -83,6 +93,9 @@ class PatientController extends Zend_Controller_Action {
         $this->view->aaData = $json;
     }
 
+    /*
+     * Liste alle Patienten auf
+     */
     public function listAction() {
         //        $this->view->headScript()->appendFile('/js/PatientTable.js');
         $this->view->jQuery()->addJavascriptFile('/js/datatable/jquery.dataTables.min.js');
@@ -91,6 +104,9 @@ class PatientController extends Zend_Controller_Action {
         $this->view->jQuery()->addJavascriptFile('/js/patient/PatientTable.js');
     }
 
+    /*
+     * Zuordnen der Sprueche zu Patienten
+     */
     public function editMaximAction() {
         $this->view->jQuery()->addJavascriptFile('/js/datatable/jquery.dataTables.min.js')
                 ->addJavascriptFile('/js/patient/PatientMaximTable.js')
@@ -115,6 +131,9 @@ class PatientController extends Zend_Controller_Action {
         $this->view->maxims = $maxims;
     }
 
+    /*
+     * Speichern der zugeordneten Sprueche
+     */
     public function saveMaximAction() {
         $request = $this->getRequest()->getPost('maxim_ids');
         // Gespeicherte Patient ID holen
@@ -134,6 +153,9 @@ class PatientController extends Zend_Controller_Action {
         $this->view->redirect = "/patient/list";
     }
 
+    /*
+     * Zuordnen der Ablenkungen zu einem Patient
+     */
     public function editDistractionAction() {
         $this->view->jQuery()->addJavascriptFile('/js/datatable/jquery.dataTables.min.js')
                 ->addJavascriptFile('/js/patient/PatientDistractionTable.js')
@@ -161,6 +183,9 @@ class PatientController extends Zend_Controller_Action {
         $this->view->distractions = $distractions;
     }
 
+    /*
+     * Speichern der zugeordneten Ablenkungen
+     */
     public function saveDistractionAction() {
         $request = $this->getRequest()->getPost('distraction_ids');
         // Gespeicherte Patient ID holen
@@ -181,12 +206,16 @@ class PatientController extends Zend_Controller_Action {
         Zend_Session::namespaceUnset('edit-distraction');
     }
 
+    
     public function runThroughAction() {
         $patientID = $this->getParam('id');
         $this->view->emergencyLink = '/emergency-case/create/' . $patientID;
         $this->view->startseite = '/index';
     }
 
+    /*
+     * Senden der E-Mail an Patienten mit dem Token
+     */
     private function sendConfirmEmail(Application_Model_Patient_Patient $patient) {
         $config = Zend_Controller_Front::getInstance()->getParam('bootstrap');
         $mailsettings = $config->getOption('mailsettings');
@@ -214,12 +243,13 @@ class PatientController extends Zend_Controller_Action {
         // render view
         $bodyText = $html->render('confirmEmail.phtml');
 
-        $mail = new Zend_Mail();
+//        $mail = new Zend_Mail();
         $mail->setBodyHtml($bodyText);
         $mail->setFrom($from);
         $mail->addTo($patient->getEmail());
         $mail->setSubject('Suchtprophylaxe Bestätigung');
-        $mail->send($transport);
+//        $mail->send($transport);
+        $mail->send();
     }
 
 }

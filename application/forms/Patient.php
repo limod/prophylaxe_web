@@ -1,10 +1,11 @@
 <?php
 
+/*
+ * Formular zum anlegen/bearbeiten eines Patienten
+ */
 class Application_Form_Patient extends Zend_Form {
 
     public function init() {
-
-
         // Setzt die Methode for das Anzeigen des Formulars mit POST
         $this->setMethod('post');
         $this->setName("patient_form");
@@ -80,9 +81,9 @@ class Application_Form_Patient extends Zend_Form {
             'label' => 'Email:',
             'required' => true,
             'class' => array('form-spl'),
-//            'validators' => array(
-//                'EmailAddress',
-//            )
+            'validators' => array(
+                'EmailAddress',
+            )
         ));
         $this->getElement('email')->setDecorators(array('ViewHelper', 'Label', 'Errors', array('HtmlTag', array('tag' => 'div'))));
 

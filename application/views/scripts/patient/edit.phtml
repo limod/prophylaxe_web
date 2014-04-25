@@ -20,7 +20,7 @@
             }
             ?>
 
-            <form method="<?php echo $form->getMethod() ?>" action="<?php echo $form->getAction() ?>">
+            <form id="<?php echo $form->getName() ?>" method="<?php echo $form->getMethod() ?>" action="<?php echo $form->getAction() ?>">
 
                 <?php echo $form->id->renderViewHelper(); ?>
                 <?php echo $form->userID_fk->renderViewHelper(); ?>

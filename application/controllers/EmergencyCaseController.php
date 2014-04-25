@@ -1,5 +1,8 @@
 <?php
 
+/*
+ * Controller zum verwalten vom Notfallkoffer
+ */
 class EmergencyCaseController extends Zend_Controller_Action
 {
 
@@ -13,6 +16,9 @@ class EmergencyCaseController extends Zend_Controller_Action
         // action body
     }
 
+    /*
+     * Anlegen eines Notfallkoffers
+     */
     public function createAction()
     {
         $this->view->jQuery()->addJavascriptFile('/js/emergency-case/EmergencyCase.js');
@@ -52,6 +58,9 @@ class EmergencyCaseController extends Zend_Controller_Action
         $this->view->form = $form;
     }
 
+    /*
+     * Bearbeiten einer Anlaufstelle
+     */
     public function editAction()
     {
         $this->view->jQuery()->addJavascriptFile('/js/emergency-case/EmergencyCase.js');
@@ -92,10 +101,7 @@ class EmergencyCaseController extends Zend_Controller_Action
         $this->view->form = $form;
     }
 
-    public function runThroughAction()
-    {
-        // action body
-    }
+   
 
 
 }

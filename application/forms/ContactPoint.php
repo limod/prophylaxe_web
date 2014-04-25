@@ -1,11 +1,14 @@
 <?php
 
+/*
+ * Formular fuer Anlaufstellen
+ */
 class Application_Form_ContactPoint extends Zend_Form {
 
     public function init() {
         // Setzt die Methode for das Anzeigen des Formulars mit POST
         $this->setMethod('post');
-        $this->setName("patient_form");
+        $this->setName("contactpoint_form");
 
         $field = new Zend_Form_Element_Hidden('cpID');
         $field->setDecorators(array('ViewHelper'));

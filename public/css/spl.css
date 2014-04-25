@@ -313,7 +313,7 @@ body.error404 i{
     color: #4892d3 !important;
 }*/
 
-.input[type="reset"]:hover, input[type="submit"]:hover, .emergency_case_delete_button:hover {
+input[type="reset"]:hover, input[type="submit"]:hover, .emergency_case_delete_button:hover {
     color: #4892d3 !important;
 }
 .btn-primary, input[type="submit"], input[type="reset"], .emergency_case_delete_button{
@@ -344,12 +344,12 @@ body.error404 i{
 /* Patient anlegen */
 
 
-#patient_form input
+#patient_form input, #contactpoint_form input
 {
     width: 100%;
     margin-bottom:10px;
 }
-#patient_form label
+#patient_form label,  #contactpoint_form label
 {
     width: 150px;
     margin: 0px;
@@ -392,15 +392,16 @@ body.error404 i{
 
 
 /* Patient bearbeiten */
-/*#maxim_table .maxim_table_edit_column, .maxim_table_delete_column, .patient_edit_table_column, .contactpoint_edit_table_column{
+#maxim_table .maxim_table_edit_column, .maxim_table_delete_column, .patient_edit_table_column, .contactpoint_edit_table_column, .center_column {
     text-align:center;
 }
 
-#patient_edit_table_wrapper label, #patient_edit_table_wrapper thead div, #patient_edit_table_wrapper .fg-toolbar div {
+/*#patient_edit_table_wrapper label, #patient_edit_table_wrapper thead div, #patient_edit_table_wrapper .fg-toolbar div {
     color:white;
 }*/
 
-#patient_edit_table .btnStatus {
+/*#patient_edit_table .btnStatus {*/
+.glyphicon{
     width:145px;
     color: #FAFAFA !important;
 
