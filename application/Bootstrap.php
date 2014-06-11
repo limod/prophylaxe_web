@@ -13,8 +13,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper');
 //        $view->jQuery()->addStylesheet('/js/jquery/css/ui-lightness/jquery-ui-1.10.3.custom.css');
         $view->jQuery()->addStylesheet('/js/jquery/css/custom-theme/jquery-ui-1.10.4.custom.css');
-        $view->jQuery()->setLocalPath('/js/jquery/js/jquery-1.9.1.js')
-                ->setUiLocalPath('/js/jquery/js/jquery-ui-1.10.3.custom.min.js');
+        $view->jQuery()->setLocalPath('/js/jquery/js/jquery-1.9.1.js');
+        $view->jQuery()->setUiLocalPath('/js/jquery/js/jquery-ui-1.10.3.custom.min.js');
 
 
 

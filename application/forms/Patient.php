@@ -3,6 +3,7 @@
 /*
  * Formular zum anlegen/bearbeiten eines Patienten
  */
+
 class Application_Form_Patient extends Zend_Form {
 
     public function init() {
@@ -87,6 +88,14 @@ class Application_Form_Patient extends Zend_Form {
         ));
         $this->getElement('email')->setDecorators(array('ViewHelper', 'Label', 'Errors', array('HtmlTag', array('tag' => 'div'))));
 
+        $this->addElement('text', 'token', array(
+            'label' => 'Token:',
+            'required' => false,
+            'readonly' => 'readonly',
+            'class' => array('form-spl')
+           
+        ));
+        $this->getElement('token')->setDecorators(array('ViewHelper', 'Label', array('HtmlTag', array('tag' => 'div')), 'Errors'));
 
         // Den Submit Button hinzufügen
         $this->addElement('submit', 'submit', array(

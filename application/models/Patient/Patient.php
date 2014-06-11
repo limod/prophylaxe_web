@@ -204,7 +204,8 @@ class Application_Model_Patient_Patient {
             'username' => $this->getUsername(),
             'birthdate' => $this->getBirthdate(),
             'email' => $this->getEmail(),
-            'userID_fk' => $this->getUserID_fk());
+            'userID_fk' => $this->getUserID_fk(),
+            'token' => $this->getToken());
     }
 
 }

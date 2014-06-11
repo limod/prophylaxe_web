@@ -22,7 +22,7 @@ class Application_Form_ContactPoint extends Zend_Form {
             'filters' => array('StringTrim'),
             'class' => array(''),
             'validators' => array(
-                array('validator' => 'StringLength', 'options' => array(3, 45))
+                array('validator' => 'StringLength', 'options' => array(3, 255))
             )
         ));
 
@@ -32,7 +32,7 @@ class Application_Form_ContactPoint extends Zend_Form {
             'required' => true,
             'class' => array(''),
             'validators' => array(
-                array('validator' => 'StringLength', 'options' => array(0, 20))
+                array('validator' => 'StringLength', 'options' => array(0, 255))
             )
         ));
 
@@ -42,7 +42,7 @@ class Application_Form_ContactPoint extends Zend_Form {
             'required' => true,
             'class' => array(''),
             'validators' => array(
-                array('validator' => 'StringLength', 'options' => array(5, 20))
+                array('validator' => 'StringLength', 'options' => array(5, 5))
             )
         ));
 
@@ -52,7 +52,7 @@ class Application_Form_ContactPoint extends Zend_Form {
             'required' => true,
             'class' => array(''),
             'validators' => array(
-                array('validator' => 'StringLength', 'options' => array(3, 20))
+                array('validator' => 'StringLength', 'options' => array(3, 255))
             )
         ));
 
@@ -62,7 +62,7 @@ class Application_Form_ContactPoint extends Zend_Form {
             'required' => true,
             'class' => array(''),
             'validators' => array(
-                array('validator' => 'StringLength', 'options' => array(3, 20))
+                array('validator' => 'StringLength', 'options' => array(3, 50))
             )
         ));
 

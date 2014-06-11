@@ -74,7 +74,8 @@ function PatientMaximTable() {
 
         // Zeile hinzufuegen
         datatable_maxim_has_patient.dataTable().fnAddData(data);
-        $('#' + maximid).bind('click', btnRemoveClick);
+//        $('#' + maximid).bind('click', btnRemoveClick);
+        $("[maximid='"+maximid+"']").bind('click', btnRemoveClick);
 //        index = datatable_maxim_has_patient.dataTable().fnGetPosition()
 //        index++; // Wegen HEader Zeile der Tabelle
 //        console.log("new line at " + index);

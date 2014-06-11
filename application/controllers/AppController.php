@@ -113,14 +113,16 @@ class AppController extends Zend_Controller_Action {
      * Liefert alle Anlaufstellen
      */
     public function getContactpointsAction() {
-        // action body
+        // Anlaufstellen Mapper erzeugen
         $contactPointMapper = new Application_Model_ContactPointMapper();
+        // Alle Anlaufstellen aus der Datenbank holen
         $contactPoints = $contactPointMapper->fetchAll();
         $json = array();
-
+        
         foreach ($contactPoints as $cp) {
             $json[] = $cp->getKeyValueArray();
         }
+        // Array in JSON umwandeln und ausgeben
         echo Zend_Json::encode($json);
         exit();
     }
